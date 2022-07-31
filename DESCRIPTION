@@ -1,12 +1,25 @@
-Package: testing
+Package: ktaucenterscpp
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
-Version: 1.0
-Date: 2022-07-28
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full sentences.
-License: GPL (>= 2)
+Title: Robust Clustering Procedures
+Version: 0.1.0
+Author: Juan Domingo Gonzalez [cre, aut],
+  Victor J. Yohai [aut],
+  Ruben H. Zamar [aut]
+Authors@R: c(person("Juan Domingo", "Gonzalez", email = "juanrst@hotmail.com", role = c("cre","aut")),
+             person("Victor J.", "Yohai", email = "victoryohai@gmail.com", role = "aut"),
+             person("Ruben H.", "Zamar", email = "ruben@stat.ubc.ca", role = "aut")
+    )
+Maintainer: Douglas Alberto Carmona Guanipa <douglas.albertocg@gmail.com>
+Description: A clustering algorithm similar to K-Means is implemented, it has two main advantages, 
+    namely (a) The estimator is resistant to outliers, that means that results of estimator are still correct when
+    there are atypical values in the sample and (b) The estimator is efficient, roughly speaking, 
+    if there are no outliers in the sample, results will be similar to those obtained by a classic algorithm (K-Means).
+    Clustering procedure is carried out by minimizing the overall robust scale so-called tau scale.
+    (see Gonzalez, Yohai and Zamar (2019) <arxiv:1906.08198>).
+References: Gonzalez J.D, Yohai V., and Zamar R. (2019) <arxiv:https://arxiv.org/abs/1906.08198>
+License: GPL (>= 3) + file LICENSE
+Encoding: UTF-8
+Language: en-US
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp
 RoxygenNote: 7.2.1
