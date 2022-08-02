@@ -31,7 +31,7 @@ NumericVector rho_aux(NumericVector t, const double c) {
 NumericVector rho_opt(NumericVector t, const double c) {
   NumericVector out(t.size());
 
-  out = pow(t, 2) / 2 / (3.25 * pow(c, 2));
+  out = 0.5 * pow(t, 2) / (3.25 * pow(c, 2));
   out[abs(t) >= 2 * c] = rho_aux(t[abs(t) >= 2 * c], c);
   out[abs(t) > 3 * c] = 1.0;
 
