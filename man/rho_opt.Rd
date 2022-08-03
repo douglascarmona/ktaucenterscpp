@@ -12,7 +12,7 @@ rho_opt(t, c)
 \item{c}{tunning constant.}
 }
 \value{
-rho(\code{t}/\code{c}\code{c})
+rho(\code{t}/\code{c})
 }
 \description{
 An implementation of quasi optimal rho functions following reference [1]

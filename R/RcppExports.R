@@ -7,7 +7,7 @@
 #'
 #'@param t numeric vector.
 #'@param c tunning constant.
-#'@return rho(\code{t}/\code{c}\code{c})
+#'@return rho(\code{t}/\code{c})
 #'@examples val <- rho_opt(t = 0.5, c = 1.0)
 #'@references [1] Salibian-Barrera, M., Willems, G., & Zamar,
 #'   R. (2008). The fast-tau estimator for regression. Journal of
@@ -16,5 +16,32 @@
 #'@export
 rho_opt <- function(t, c) {
     .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', t, c)
+}
+
+#'psi_opt function
+#'
+#' An implementation of the derivative of quasi optimal rho function
+#'
+#'@param t a numeric vector
+#'@param c a tunning constant.
+#'@return psi(\code{t}/ \code{c})
+#'@examples val <- psi_opt(t = 0.5, c = 1)
+#'
+#'@export
+psi_opt <- function(t, c) {
+    .Call('_ktaucenterscpp_psi_opt', PACKAGE = 'ktaucenterscpp', t, c)
+}
+
+#' derpsiOpt
+#' the derivative of the psi function
+#'
+#' @param t a numeric vector
+#' @param c a tunning constant.
+#' @return rho'(\code{x}/ \code{c})
+#' @examples val <- derpsi_opt(t = 0.5, c = 1.0)
+#'
+#' @export
+derpsi_opt <- function(t, c) {
+    .Call('_ktaucenterscpp_derpsi_opt', PACKAGE = 'ktaucenterscpp', t, c)
 }
 
