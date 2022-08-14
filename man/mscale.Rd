@@ -5,16 +5,16 @@
 \title{mscale
 the m scale of an univariate sample (see reference below)}
 \usage{
-mscale(u, b, c)
+mscale(u, c, b)
 }
 \arguments{
 \item{u}{an univariate sample of size n.}
 
-\item{b}{the desired break down point}
-
 \item{c}{a tuning constant, if consistency to standard normal
   distribution is desired use
 \code{\link{normal_consistency_constants}}}
+
+\item{b}{the desired break down point}
 }
 \value{
 the mscale value

@@ -45,8 +45,8 @@ median_cpp <- function(x) {
 #' @return the mscale value
 #'
 #' @export
-mscale <- function(u, b, c) {
-    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, b, c)
+mscale <- function(u, c, b) {
+    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, c, b)
 }
 
 #'rho_opt function

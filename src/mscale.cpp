@@ -1,3 +1,4 @@
+#include "mscale.h"
 #include "rho_opt.h"
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -22,6 +23,7 @@ using namespace Rcpp;
 //'@export
 // [[Rcpp::export]]
 double normal_consistency_constants(int p) {
+  // TODO: Replace hard coded values with function
   NumericVector vaux{
       0.404629, 0.6944748, 0.8985921, 1.063144, 1.204321, 1.329791, 1.443817,
       1.548994, 1.647149,  1.739537,  1.827075, 1.910406, 1.99017,  2.066772,
@@ -116,23 +118,36 @@ double median_cpp(NumericVector x) {
 //'
 //' @export
 // [[Rcpp::export]]
-double mscale(NumericVector u, double b, double c) {
+double mscale(NumericVector u, double c, double b) {
+
+  const double max_error_diff = 1e-10;
+
   // TODO: Indicate why dividing by 0.6745
   double sn = median_cpp(abs(u)) / 0.6745;
+  if (sn == 0)
+    return sn;
 
-  // Should I keep == 0 or is close?
-  // if (sn == 0.0)
-  //   return sn;
+  double diff = mean(rho_opt(u / sn, c)) - b;
+  if (std::abs(diff) <= max_error_diff)
+    return sn;
 
-  // double quantity = mean(rho_opt(u / sn, c)) - b;
+  while (diff > 0.0) {
+    sn = 1.5 * sn;
+    diff = mean(rho_opt(u / sn, c)) - b;
+  }
 
-  // // Should I keep == 0 or is close?
-  // if (quantity == 0.0)
-  //   return (sn);
-
-  // while (quantity > 0.0) {
-  //   sn = 1.5 * sn;
-  //   quantity = mean(rho_opt(u / sn, c)) - b;
-  // }
+  int i = 0;
+  double error = 1.0;
+  double Fk, Gk, factor;
+  NumericVector var;
+  while ((i < 1000) & (error > max_error_diff)) {
+    var = u / sn;
+    Fk = mean(rho_opt(var, c));
+    Gk = mean(psi_opt(var, c) * var);
+    factor = (Fk - Gk - b) / (2.0 * Fk - Gk - 2.0 * b);
+    error = std::abs(factor - 1);
+    sn = sn * std::abs(factor);
+    i += 1;
+  }
   return sn;
 }
