@@ -10,19 +10,108 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _ktaucenterscpp_rcpp_hello_world() {
+// normal_consistency_constants
+double normal_consistency_constants(int p);
+RcppExport SEXP _ktaucenterscpp_normal_consistency_constants(SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(normal_consistency_constants(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// c1
+double c1();
+RcppExport SEXP _ktaucenterscpp_c1() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(c1());
+    return rcpp_result_gen;
+END_RCPP
+}
+// c2
+double c2(int p);
+RcppExport SEXP _ktaucenterscpp_c2(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(c2(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// median_cpp
+double median_cpp(NumericVector x);
+RcppExport SEXP _ktaucenterscpp_median_cpp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(median_cpp(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mscale
+double mscale(NumericVector u, double c, double b);
+RcppExport SEXP _ktaucenterscpp_mscale(SEXP uSEXP, SEXP cSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(mscale(u, c, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rho_opt
+NumericVector rho_opt(NumericVector t, double c);
+RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP tSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(rho_opt(t, c));
+    return rcpp_result_gen;
+END_RCPP
+}
+// psi_opt
+NumericVector psi_opt(NumericVector t, double c);
+RcppExport SEXP _ktaucenterscpp_psi_opt(SEXP tSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(psi_opt(t, c));
+    return rcpp_result_gen;
+END_RCPP
+}
+// derpsi_opt
+NumericVector derpsi_opt(NumericVector t, double c);
+RcppExport SEXP _ktaucenterscpp_derpsi_opt(SEXP tSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(derpsi_opt(t, c));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ktaucenterscpp_rcpp_hello_world", (DL_FUNC) &_ktaucenterscpp_rcpp_hello_world, 0},
+    {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
+    {"_ktaucenterscpp_c1", (DL_FUNC) &_ktaucenterscpp_c1, 0},
+    {"_ktaucenterscpp_c2", (DL_FUNC) &_ktaucenterscpp_c2, 1},
+    {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
+    {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
+    {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
+    {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
+    {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},
     {NULL, NULL, 0}
 };
 
