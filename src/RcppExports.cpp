@@ -21,6 +21,51 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// c1
+double c1();
+RcppExport SEXP _ktaucenterscpp_c1() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(c1());
+    return rcpp_result_gen;
+END_RCPP
+}
+// c2
+double c2(int p);
+RcppExport SEXP _ktaucenterscpp_c2(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(c2(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// median_cpp
+double median_cpp(NumericVector x);
+RcppExport SEXP _ktaucenterscpp_median_cpp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(median_cpp(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mscale
+double mscale(NumericVector u, double b, double c);
+RcppExport SEXP _ktaucenterscpp_mscale(SEXP uSEXP, SEXP bSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(mscale(u, b, c));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rho_opt
 NumericVector rho_opt(NumericVector t, double c);
 RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP tSEXP, SEXP cSEXP) {
@@ -60,6 +105,10 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
+    {"_ktaucenterscpp_c1", (DL_FUNC) &_ktaucenterscpp_c1, 0},
+    {"_ktaucenterscpp_c2", (DL_FUNC) &_ktaucenterscpp_c2, 1},
+    {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
+    {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
     {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
     {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
     {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},

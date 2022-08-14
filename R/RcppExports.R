@@ -22,6 +22,33 @@ normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
 
+c1 <- function() {
+    .Call('_ktaucenterscpp_c1', PACKAGE = 'ktaucenterscpp')
+}
+
+c2 <- function(p) {
+    .Call('_ktaucenterscpp_c2', PACKAGE = 'ktaucenterscpp', p)
+}
+
+median_cpp <- function(x) {
+    .Call('_ktaucenterscpp_median_cpp', PACKAGE = 'ktaucenterscpp', x)
+}
+
+#' mscale
+#' the m scale of an univariate sample (see reference below)
+#'
+#' @param u an univariate sample of size n.
+#' @param b the desired break down point
+#' @param c a tuning constant, if consistency to standard normal
+#'   distribution is desired use
+#' \code{\link{normal_consistency_constants}}
+#' @return the mscale value
+#'
+#' @export
+mscale <- function(u, b, c) {
+    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, b, c)
+}
+
 #'rho_opt function
 #'
 #' An implementation of quasi optimal rho functions following reference [1]

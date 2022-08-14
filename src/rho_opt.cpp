@@ -21,9 +21,9 @@ NumericVector rho_opt(NumericVector t, double c) {
   NumericVector out(t.size(), 1.0);
 
   auto rho_aux = [c](const double &t) -> double {
-    if (std::abs(t / c) <= 2) {
+    if (std::abs(t) <= 2 * c) {
       return 0.5 * pow(t, 2) / (3.25 * pow(c, 2));
-    } else if (std::abs(t / c) <= 3) {
+    } else if (std::abs(t) <= 3 * c) {
       return (1.792 - 0.972 * pow(t, 2) / pow(c, 2) +
               0.432 * pow(t, 4) / pow(c, 4) - 0.052 * pow(t, 6) / pow(c, 6) +
               0.002 * pow(t, 8) / pow(c, 8)) /
@@ -53,9 +53,9 @@ NumericVector psi_opt(NumericVector t, double c) {
   NumericVector out(t.size());
 
   auto psi_aux = [c](const double &t) -> double {
-    if (std::abs(t / c) <= 2) {
+    if (std::abs(t) <= 2 * c) {
       return t / (3.25 * pow(c, 2));
-    } else if (std::abs(t / c) <= 3) {
+    } else if (std::abs(t) <= 3 * c) {
       return (-1.944 * t / pow(c, 2) + 1.728 * pow(t, 3) / pow(c, 4) -
               0.312 * pow(t, 5) / pow(c, 6) + 0.016 * pow(t, 7) / pow(c, 8)) /
              3.25;
@@ -83,9 +83,9 @@ NumericVector derpsi_opt(NumericVector t, double c) {
   NumericVector out(t.size());
 
   auto derpsi_aux = [c](const double &t) -> double {
-    if (std::abs(t / c) <= 2) {
+    if (std::abs(t) <= 2 * c) {
       return 1.0 / (3.25 * pow(c, 2));
-    } else if (std::abs(t / c) <= 3) {
+    } else if (std::abs(t) <= 3 * c) {
       return (-1.944 / pow(c, 2) + 5.184 * pow(t, 2) / pow(c, 4) -
               1.56 * pow(t, 4) / pow(c, 6) + 0.112 * pow(t, 6) / pow(c, 8)) /
              3.25;

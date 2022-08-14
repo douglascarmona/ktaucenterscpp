@@ -83,3 +83,56 @@ double normal_consistency_constants(int p) {
       11.09393};
   return vaux(p - 1);
 }
+
+// TODO: Add comment about what c1 represents
+// [[Rcpp::export]]
+double c1() { return 1.0; }
+
+// TODO: Add comment about what c2 represents
+// [[Rcpp::export]]
+double c2(int p) {
+  // TODO: add comment about Maronna reference
+  return 2.9987 * pow(p, -0.4647);
+}
+
+// [[Rcpp::export]]
+double median_cpp(NumericVector x) {
+  std::size_t size = x.size();
+  std::sort(x.begin(), x.end());
+  if (size % 2 == 0)
+    return (x[size / 2 - 1] + x[size / 2]) / 2.0;
+  return x[size / 2];
+}
+
+//' mscale
+//' the m scale of an univariate sample (see reference below)
+//'
+//' @param u an univariate sample of size n.
+//' @param b the desired break down point
+//' @param c a tuning constant, if consistency to standard normal
+//'   distribution is desired use
+//' \code{\link{normal_consistency_constants}}
+//' @return the mscale value
+//'
+//' @export
+// [[Rcpp::export]]
+double mscale(NumericVector u, double b, double c) {
+  // TODO: Indicate why dividing by 0.6745
+  double sn = median_cpp(abs(u)) / 0.6745;
+
+  // Should I keep == 0 or is close?
+  // if (sn == 0.0)
+  //   return sn;
+
+  // double quantity = mean(rho_opt(u / sn, c)) - b;
+
+  // // Should I keep == 0 or is close?
+  // if (quantity == 0.0)
+  //   return (sn);
+
+  // while (quantity > 0.0) {
+  //   sn = 1.5 * sn;
+  //   quantity = mean(rho_opt(u / sn, c)) - b;
+  // }
+  return sn;
+}
