@@ -10,6 +10,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// distance_to_centers
+List distance_to_centers(NumericMatrix data, NumericMatrix centers);
+RcppExport SEXP _ktaucenterscpp_distance_to_centers(SEXP dataSEXP, SEXP centersSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
+    rcpp_result_gen = Rcpp::wrap(distance_to_centers(data, centers));
+    return rcpp_result_gen;
+END_RCPP
+}
 // normal_consistency_constants
 double normal_consistency_constants(int p);
 RcppExport SEXP _ktaucenterscpp_normal_consistency_constants(SEXP pSEXP) {
@@ -104,6 +116,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_ktaucenterscpp_distance_to_centers", (DL_FUNC) &_ktaucenterscpp_distance_to_centers, 2},
     {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
     {"_ktaucenterscpp_c1", (DL_FUNC) &_ktaucenterscpp_c1, 0},
     {"_ktaucenterscpp_c2", (DL_FUNC) &_ktaucenterscpp_c2, 1},
