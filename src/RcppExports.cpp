@@ -114,6 +114,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// tau_scale
+double tau_scale(NumericVector u, double c, double s, double b);
+RcppExport SEXP _ktaucenterscpp_tau_scale(SEXP uSEXP, SEXP cSEXP, SEXP sSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< double >::type s(sSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(tau_scale(u, c, s, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// wni
+NumericVector wni(NumericVector u, double c1, double c2, double s, double b1, double b2);
+RcppExport SEXP _ktaucenterscpp_wni(SEXP uSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP, SEXP b1SEXP, SEXP b2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< double >::type c1(c1SEXP);
+    Rcpp::traits::input_parameter< double >::type c2(c2SEXP);
+    Rcpp::traits::input_parameter< double >::type s(sSEXP);
+    Rcpp::traits::input_parameter< double >::type b1(b1SEXP);
+    Rcpp::traits::input_parameter< double >::type b2(b2SEXP);
+    rcpp_result_gen = Rcpp::wrap(wni(u, c1, c2, s, b1, b2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_distance_to_centers", (DL_FUNC) &_ktaucenterscpp_distance_to_centers, 2},
@@ -125,6 +155,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
     {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
     {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},
+    {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 4},
+    {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 6},
     {NULL, NULL, 0}
 };
 

@@ -97,3 +97,15 @@ derpsi_opt <- function(t, c) {
     .Call('_ktaucenterscpp_derpsi_opt', PACKAGE = 'ktaucenterscpp', t, c)
 }
 
+#'tau_scale function
+#'@export
+tau_scale <- function(u, c, s, b) {
+    .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', u, c, s, b)
+}
+
+#'Wni function
+#'@export
+wni <- function(u, c1, c2, s, b1, b2) {
+    .Call('_ktaucenterscpp_wni', PACKAGE = 'ktaucenterscpp', u, c1, c2, s, b1, b2)
+}
+
