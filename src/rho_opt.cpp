@@ -1,7 +1,6 @@
 #include "rho_opt.h"
 #include <Rcpp.h>
 using namespace Rcpp;
-// [[Rcpp::plugins("cpp11")]]
 
 //'rho_opt function
 //'
@@ -18,22 +17,23 @@ using namespace Rcpp;
 //'@export
 // [[Rcpp::export]]
 NumericVector rho_opt(NumericVector t, double c) {
-  NumericVector out(t.size(), 1.0);
+  NumericVector out(Rf_allocVector(REALSXP, t.size()));
 
-  auto rho_aux = [c](const double &t) -> double {
-    if (std::abs(t) <= 2 * c) {
-      return 0.5 * pow(t, 2) / (3.25 * pow(c, 2));
-    } else if (std::abs(t) <= 3 * c) {
-      return (1.792 - 0.972 * pow(t, 2) / pow(c, 2) +
-              0.432 * pow(t, 4) / pow(c, 4) - 0.052 * pow(t, 6) / pow(c, 6) +
-              0.002 * pow(t, 8) / pow(c, 8)) /
-             3.25;
+  R_xlen_t idx = 0;
+  for (const auto &t_it : t) {
+    if (fabs(t_it) <= 2 * c) {
+      out[idx] = 0.5 * pow(t_it, 2) / (3.25 * pow(c, 2));
+    } else if (fabs(t_it) <= 3 * c) {
+      out[idx] =
+          (1.792 - 0.972 * pow(t_it, 2) / pow(c, 2) +
+           0.432 * pow(t_it, 4) / pow(c, 4) - 0.052 * pow(t_it, 6) / pow(c, 6) +
+           0.002 * pow(t_it, 8) / pow(c, 8)) /
+          3.25;
     } else {
-      return 1.0;
+      out[idx] = 1.0;
     }
-  };
-
-  std::transform(t.begin(), t.end(), out.begin(), rho_aux);
+    ++idx;
+  }
 
   return out;
 }
@@ -50,21 +50,22 @@ NumericVector rho_opt(NumericVector t, double c) {
 //'@export
 // [[Rcpp::export]]
 NumericVector psi_opt(NumericVector t, double c) {
-  NumericVector out(t.size());
+  NumericVector out(Rf_allocVector(REALSXP, t.size()));
 
-  auto psi_aux = [c](const double &t) -> double {
-    if (std::abs(t) <= 2 * c) {
-      return t / (3.25 * pow(c, 2));
-    } else if (std::abs(t) <= 3 * c) {
-      return (-1.944 * t / pow(c, 2) + 1.728 * pow(t, 3) / pow(c, 4) -
-              0.312 * pow(t, 5) / pow(c, 6) + 0.016 * pow(t, 7) / pow(c, 8)) /
-             3.25;
+  R_xlen_t idx = 0;
+  for (const auto &t_it : t) {
+    if (fabs(t_it) <= 2 * c) {
+      out[idx] = t_it / (3.25 * pow(c, 2));
+    } else if (fabs(t_it) <= 3 * c) {
+      out[idx] = (-1.944 * t_it / pow(c, 2) + 1.728 * pow(t_it, 3) / pow(c, 4) -
+                  0.312 * pow(t_it, 5) / pow(c, 6) +
+                  0.016 * pow(t_it, 7) / pow(c, 8)) /
+                 3.25;
     } else {
-      return 0.0;
+      out[idx] = 0.0;
     }
-  };
-
-  std::transform(t.begin(), t.end(), out.begin(), psi_aux);
+    ++idx;
+  }
 
   return out;
 }
@@ -80,21 +81,22 @@ NumericVector psi_opt(NumericVector t, double c) {
 //' @export
 // [[Rcpp::export]]
 NumericVector derpsi_opt(NumericVector t, double c) {
-  NumericVector out(t.size());
+  NumericVector out(Rf_allocVector(REALSXP, t.size()));
 
-  auto derpsi_aux = [c](const double &t) -> double {
-    if (std::abs(t) <= 2 * c) {
-      return 1.0 / (3.25 * pow(c, 2));
-    } else if (std::abs(t) <= 3 * c) {
-      return (-1.944 / pow(c, 2) + 5.184 * pow(t, 2) / pow(c, 4) -
-              1.56 * pow(t, 4) / pow(c, 6) + 0.112 * pow(t, 6) / pow(c, 8)) /
-             3.25;
+  R_xlen_t idx = 0;
+  for (const auto &t_it : t) {
+    if (fabs(t_it) <= 2 * c) {
+      out[idx] = 1.0 / (3.25 * pow(c, 2));
+    } else if (fabs(t_it) <= 3 * c) {
+      out[idx] =
+          (-1.944 / pow(c, 2) + 5.184 * pow(t_it, 2) / pow(c, 4) -
+           1.56 * pow(t_it, 4) / pow(c, 6) + 0.112 * pow(t_it, 6) / pow(c, 8)) /
+          3.25;
     } else {
-      return 0.0;
+      out[idx] = 0.0;
     }
-  };
-
-  std::transform(t.begin(), t.end(), out.begin(), derpsi_aux);
+    ++idx;
+  }
 
   return out;
 }

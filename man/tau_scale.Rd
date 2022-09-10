@@ -4,7 +4,7 @@
 \alias{tau_scale}
 \title{rho_opt function}
 \usage{
-tau_scale(u, c, s, b)
+tau_scale(u, c, s)
 }
 \description{
 rho_opt function

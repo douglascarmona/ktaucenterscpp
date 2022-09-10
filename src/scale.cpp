@@ -1,8 +1,8 @@
-#include "mscale.h"
+#include "scale.h"
 #include "rho_opt.h"
+#include "utils.h"
 #include <Rcpp.h>
 using namespace Rcpp;
-// [[Rcpp::plugins("cpp11")]]
 
 //'normal_consistency_constants
 //'
@@ -87,23 +87,20 @@ double normal_consistency_constants(int p) {
 }
 
 // TODO: Add comment about what c1 represents
+// distance function
+//'
+//'@export
 // [[Rcpp::export]]
-double c1() { return 1.0; }
+double const_c1() { return 1.0; }
 
 // TODO: Add comment about what c2 represents
+// distance function
+//'
+//'@export
 // [[Rcpp::export]]
-double c2(int p) {
+double const_c2(int p) {
   // TODO: add comment about Maronna reference
   return 2.9987 * pow(p, -0.4647);
-}
-
-// [[Rcpp::export]]
-double median_cpp(NumericVector x) {
-  std::size_t size = x.size();
-  std::sort(x.begin(), x.end());
-  if (size % 2 == 0)
-    return (x[size / 2 - 1] + x[size / 2]) / 2.0;
-  return x[size / 2];
 }
 
 //' mscale
@@ -128,7 +125,7 @@ double mscale(NumericVector u, double c, double b) {
     return sn;
 
   double diff = mean(rho_opt(u / sn, c)) - b;
-  if (std::abs(diff) <= max_error_diff)
+  if (fabs(diff) <= max_error_diff)
     return sn;
 
   while (diff > 0.0) {
@@ -145,9 +142,130 @@ double mscale(NumericVector u, double c, double b) {
     Fk = mean(rho_opt(var, c));
     Gk = mean(psi_opt(var, c) * var);
     factor = (Fk - Gk - b) / (2.0 * Fk - Gk - 2.0 * b);
-    error = std::abs(factor - 1);
-    sn = sn * std::abs(factor);
+    error = fabs(factor - 1);
+    sn = sn * fabs(factor);
     i += 1;
   }
   return sn;
+}
+
+// TODO: Add docs
+//'rho_opt function
+//'@export
+// [[Rcpp::export]]
+double tau_scale(NumericVector u, double c, double s) {
+  return s * sqrt(mean(rho_opt(u / s, c)));
+}
+
+// TODO: Add docs
+//'Wni function
+//'@export
+// [[Rcpp::export]]
+NumericVector wni(NumericVector u, double c1, double c2, double s) {
+
+  NumericVector dnor = u / s;
+  double A = sum(2 * rho_opt(dnor, c2) - psi_opt(dnor, c2) * dnor);
+  double B = sum(psi_opt(dnor, c1) * dnor);
+  return ifelse(u == 0.0, A * derpsi_opt(0.0, c1) + B * derpsi_opt(0.0, c2),
+                (A * psi_opt(dnor, c1) + B * psi_opt(dnor, c2)) / dnor);
+}
+
+// TODO: Add docs
+// total_wni_by_cluster function
+//'
+//'@export
+// [[Rcpp::export]]
+NumericVector get_weights(NumericVector x, IntegerVector clusters) {
+  // TODO: Add check for both vectors having same size
+  // TODO: Think better way to count numbers of unique values in grouping
+  const int n_cluster = unique(clusters).size();
+  NumericVector out(Rf_allocVector(REALSXP, x.size()));
+  NumericVector sum_wni(n_cluster, 0.0);
+  IntegerVector count_cluster(n_cluster, 0.0);
+
+  // Reescribir el for loop usando este metodo
+
+  // for(it = x.begin(), out_it = out.begin(); it != x.end();
+  //     ++it, ++out_it)
+
+  int idx = 0;
+  for (const auto &cluster_it : clusters) {
+    sum_wni[cluster_it - 1] += x[idx];
+    count_cluster[cluster_it - 1] += 1;
+    ++idx;
+  }
+
+  // TODO: This can we rewrite with stl::transform
+  idx = 0;
+  for (const auto &cluster_it : clusters) {
+    if (sum_wni[cluster_it - 1] != 0.0) {
+      out[idx] = x[idx] / sum_wni[cluster_it - 1];
+    } else {
+      out[idx] = 1 / count_cluster[cluster_it - 1];
+    }
+    ++idx;
+  }
+
+  return out;
+}
+
+// TODO: Add docs
+// get_new_centers function
+//'
+//'@export
+// [[Rcpp::export]]
+NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
+                              IntegerVector clusters, const int n_clusters,
+                              NumericVector distances_min) {
+  const int p = x.cols();
+  const int n = x.rows();
+
+  NumericMatrix out(n_clusters, p);
+
+  for (int column = 0; column != p; ++column) {
+    NumericVector tmp(Rf_allocVector(REALSXP, n));
+    for (int row = 0; row != n; ++row) {
+      tmp[row] = x(row, column) * weights[row];
+    }
+
+    NumericVector sums(n_clusters, 0.0);
+
+    // Reescribir el for loop usando este metodo
+
+    // for(it = x.begin(), out_it = out.begin(); it != x.end();
+    //     ++it, ++out_it)
+
+    int idx = 0;
+    for (const auto &cluster_it : clusters) {
+      sums[cluster_it - 1] += tmp[idx];
+      ++idx;
+    }
+
+    for (const auto &cluster_it : clusters) {
+      out(cluster_it - 1, column) = sums[cluster_it - 1];
+    }
+  }
+
+  LogicalVector empty_clusters = tabulatecpp(clusters, n_clusters) == 0;
+
+  if (any(empty_clusters).is_true()) {
+    IntegerVector empty_pos;
+    for (int i = 0; i < empty_clusters.size(); i++) {
+      if (empty_clusters[i]) {
+        empty_pos.push_back(i);
+      }
+    }
+
+    IntegerVector furthest_indices = top_index(distances_min, empty_pos.size());
+
+    for (int column = 0; column != p; ++column) {
+      int idx = 0;
+      for (const auto &position : empty_pos) {
+        out(position, column) = x(furthest_indices[idx], column);
+        ++idx;
+      }
+    }
+  }
+
+  return out;
 }

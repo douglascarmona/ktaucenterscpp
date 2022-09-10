@@ -11,70 +11,28 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // distance_to_centers
-List distance_to_centers(NumericMatrix data, NumericMatrix centers);
-RcppExport SEXP _ktaucenterscpp_distance_to_centers(SEXP dataSEXP, SEXP centersSEXP) {
+List distance_to_centers(NumericMatrix x, NumericMatrix centers);
+RcppExport SEXP _ktaucenterscpp_distance_to_centers(SEXP xSEXP, SEXP centersSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
-    rcpp_result_gen = Rcpp::wrap(distance_to_centers(data, centers));
+    rcpp_result_gen = Rcpp::wrap(distance_to_centers(x, centers));
     return rcpp_result_gen;
 END_RCPP
 }
-// normal_consistency_constants
-double normal_consistency_constants(int p);
-RcppExport SEXP _ktaucenterscpp_normal_consistency_constants(SEXP pSEXP) {
+// ktaucenters_run
+List ktaucenters_run(NumericMatrix x, NumericMatrix centers, double tolerance, int max_iter);
+RcppExport SEXP _ktaucenterscpp_ktaucenters_run(SEXP xSEXP, SEXP centersSEXP, SEXP toleranceSEXP, SEXP max_iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(normal_consistency_constants(p));
-    return rcpp_result_gen;
-END_RCPP
-}
-// c1
-double c1();
-RcppExport SEXP _ktaucenterscpp_c1() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(c1());
-    return rcpp_result_gen;
-END_RCPP
-}
-// c2
-double c2(int p);
-RcppExport SEXP _ktaucenterscpp_c2(SEXP pSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(c2(p));
-    return rcpp_result_gen;
-END_RCPP
-}
-// median_cpp
-double median_cpp(NumericVector x);
-RcppExport SEXP _ktaucenterscpp_median_cpp(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(median_cpp(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mscale
-double mscale(NumericVector u, double c, double b);
-RcppExport SEXP _ktaucenterscpp_mscale(SEXP uSEXP, SEXP cSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(mscale(u, c, b));
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(ktaucenters_run(x, centers, tolerance, max_iter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -114,23 +72,67 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// normal_consistency_constants
+double normal_consistency_constants(int p);
+RcppExport SEXP _ktaucenterscpp_normal_consistency_constants(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(normal_consistency_constants(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// const_c1
+double const_c1();
+RcppExport SEXP _ktaucenterscpp_const_c1() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(const_c1());
+    return rcpp_result_gen;
+END_RCPP
+}
+// const_c2
+double const_c2(int p);
+RcppExport SEXP _ktaucenterscpp_const_c2(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(const_c2(p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mscale
+double mscale(NumericVector u, double c, double b);
+RcppExport SEXP _ktaucenterscpp_mscale(SEXP uSEXP, SEXP cSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(mscale(u, c, b));
+    return rcpp_result_gen;
+END_RCPP
+}
 // tau_scale
-double tau_scale(NumericVector u, double c, double s, double b);
-RcppExport SEXP _ktaucenterscpp_tau_scale(SEXP uSEXP, SEXP cSEXP, SEXP sSEXP, SEXP bSEXP) {
+double tau_scale(NumericVector u, double c, double s);
+RcppExport SEXP _ktaucenterscpp_tau_scale(SEXP uSEXP, SEXP cSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(tau_scale(u, c, s, b));
+    rcpp_result_gen = Rcpp::wrap(tau_scale(u, c, s));
     return rcpp_result_gen;
 END_RCPP
 }
 // wni
-NumericVector wni(NumericVector u, double c1, double c2, double s, double b1, double b2);
-RcppExport SEXP _ktaucenterscpp_wni(SEXP uSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP, SEXP b1SEXP, SEXP b2SEXP) {
+NumericVector wni(NumericVector u, double c1, double c2, double s);
+RcppExport SEXP _ktaucenterscpp_wni(SEXP uSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -138,25 +140,103 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type c1(c1SEXP);
     Rcpp::traits::input_parameter< double >::type c2(c2SEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    Rcpp::traits::input_parameter< double >::type b1(b1SEXP);
-    Rcpp::traits::input_parameter< double >::type b2(b2SEXP);
-    rcpp_result_gen = Rcpp::wrap(wni(u, c1, c2, s, b1, b2));
+    rcpp_result_gen = Rcpp::wrap(wni(u, c1, c2, s));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_weights
+NumericVector get_weights(NumericVector x, IntegerVector clusters);
+RcppExport SEXP _ktaucenterscpp_get_weights(SEXP xSEXP, SEXP clustersSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clusters(clustersSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_weights(x, clusters));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_new_centers
+NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights, IntegerVector clusters, const int n_clusters, NumericVector distances_min);
+RcppExport SEXP _ktaucenterscpp_get_new_centers(SEXP xSEXP, SEXP weightsSEXP, SEXP clustersSEXP, SEXP n_clustersSEXP, SEXP distances_minSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type clusters(clustersSEXP);
+    Rcpp::traits::input_parameter< const int >::type n_clusters(n_clustersSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type distances_min(distances_minSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_new_centers(x, weights, clusters, n_clusters, distances_min));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tabulatecpp
+IntegerVector tabulatecpp(IntegerVector x, const unsigned max);
+RcppExport SEXP _ktaucenterscpp_tabulatecpp(SEXP xSEXP, SEXP maxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const unsigned >::type max(maxSEXP);
+    rcpp_result_gen = Rcpp::wrap(tabulatecpp(x, max));
+    return rcpp_result_gen;
+END_RCPP
+}
+// median_cpp
+double median_cpp(NumericVector x);
+RcppExport SEXP _ktaucenterscpp_median_cpp(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(median_cpp(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// top_index
+IntegerVector top_index(NumericVector v, int n);
+RcppExport SEXP _ktaucenterscpp_top_index(SEXP vSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(top_index(v, n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// max_tolerance
+double max_tolerance(NumericMatrix old_centers, NumericMatrix centers);
+RcppExport SEXP _ktaucenterscpp_max_tolerance(SEXP old_centersSEXP, SEXP centersSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type old_centers(old_centersSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
+    rcpp_result_gen = Rcpp::wrap(max_tolerance(old_centers, centers));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_distance_to_centers", (DL_FUNC) &_ktaucenterscpp_distance_to_centers, 2},
-    {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
-    {"_ktaucenterscpp_c1", (DL_FUNC) &_ktaucenterscpp_c1, 0},
-    {"_ktaucenterscpp_c2", (DL_FUNC) &_ktaucenterscpp_c2, 1},
-    {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
-    {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
+    {"_ktaucenterscpp_ktaucenters_run", (DL_FUNC) &_ktaucenterscpp_ktaucenters_run, 4},
     {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
     {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
     {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},
-    {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 4},
-    {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 6},
+    {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
+    {"_ktaucenterscpp_const_c1", (DL_FUNC) &_ktaucenterscpp_const_c1, 0},
+    {"_ktaucenterscpp_const_c2", (DL_FUNC) &_ktaucenterscpp_const_c2, 1},
+    {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
+    {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 3},
+    {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 4},
+    {"_ktaucenterscpp_get_weights", (DL_FUNC) &_ktaucenterscpp_get_weights, 2},
+    {"_ktaucenterscpp_get_new_centers", (DL_FUNC) &_ktaucenterscpp_get_new_centers, 5},
+    {"_ktaucenterscpp_tabulatecpp", (DL_FUNC) &_ktaucenterscpp_tabulatecpp, 2},
+    {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
+    {"_ktaucenterscpp_top_index", (DL_FUNC) &_ktaucenterscpp_top_index, 2},
+    {"_ktaucenterscpp_max_tolerance", (DL_FUNC) &_ktaucenterscpp_max_tolerance, 2},
     {NULL, NULL, 0}
 };
 
