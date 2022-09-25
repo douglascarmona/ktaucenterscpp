@@ -2,7 +2,7 @@
 #'
 #' A robust and efficient version of kmeans algorithm
 #' @param x numeric matrix of data, or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).
-#' @param centers either the number of clusters, say __k__, or a set of initial (distinct) cluster centers.
+#' @param centers either the number of clusters, say *k*, or a set of initial (distinct) cluster centers.
 #' @param max_iter a maximum number of iterations used for the algorithm stopping rule
 #' @param tolerance a tolerance parameter used for the algorithm stopping rule
 #' @param n_runs the number of trials that the base algorithm must run. If it is greater than 1 and center is not set as NULL, a random set of (distinct) rows in \code{x} will be chosen as the initial centers.
@@ -69,14 +69,15 @@ ktaucenters <- function(x,
                         centers,
                         iter_max = 100L,
                         tolerance = 1e-6,
-                        n_runs = 1L,
                         method = c("optimal-weight", "rocke"),
+                        n_runs = 1L,
                         init_centers = list(quote(init_kmeans), quote(init_robin)),
                         flag_outliers = outliers_tau_cutoff(0.999,
                                                             0.5)) {
-                                                         
+    # Parameters check                                                    
     x <- as.matrix(x)
-    n_clusters = ifelse(is.list(centers), length(centers), centers)
+    n_clusters <- ifelse(is.list(centers), length(centers), centers)
+    method <- match.arg(method)
     
     # Set up center initialization
     add_init_custom = NULL

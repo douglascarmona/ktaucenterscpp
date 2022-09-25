@@ -9,8 +9,8 @@ ktaucenters(
   centers,
   iter_max = 100L,
   tolerance = 1e-06,
-  n_runs = 1L,
   method = c("optimal-weight", "rocke"),
+  n_runs = 1L,
   init_centers = list(quote(init_kmeans), quote(init_robin)),
   flag_outliers = outliers_tau_cutoff(0.999, 0.5)
 )
@@ -18,7 +18,7 @@ ktaucenters(
 \arguments{
 \item{x}{numeric matrix of data, or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).}
 
-\item{centers}{either the number of clusters, say __k__, or a set of initial (distinct) cluster centers.}
+\item{centers}{either the number of clusters, say *k*, or a set of initial (distinct) cluster centers.}
 
 \item{tolerance}{a tolerance parameter used for the algorithm stopping rule}
 
