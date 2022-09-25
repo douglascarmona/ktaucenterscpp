@@ -19,6 +19,7 @@ Description: A clustering algorithm similar to K-Means is implemented, it has tw
 References: Gonzalez J.D, Yohai V., and Zamar R. (2019) <arxiv:https://arxiv.org/abs/1906.08198>
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 4.2), methods, dbscan
 Language: en-US
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp
