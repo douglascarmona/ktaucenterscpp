@@ -9,8 +9,8 @@ distance_to_centers <- function(x, centers) {
 
 #'
 #'@export
-ktaucenters_run <- function(x, centers, tolerance, max_iter) {
-    .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, max_iter)
+ktaucenters_run <- function(x, centers, tolerance, iter_max, method) {
+    .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, iter_max, method)
 }
 
 #'rho_opt function
