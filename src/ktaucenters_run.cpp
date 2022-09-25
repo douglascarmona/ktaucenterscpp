@@ -36,18 +36,12 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
     // only use Rcpp classes for exported functions
     distances_min = dists["min_distance"];
     clusters = dists["membership"];
-    double s = mscale(distances_min, c1,
-                      b1); // This function can be modified to take c++ vectors
-    tau = tau_scale(distances_min, c2,
-                    s); // This function can be modified to take c++ vectors
-
+    double s = mscale(distances_min, c1, b1);
+    tau = tau_scale(distances_min, c2, s);
     // Step 2: (re)compute centers
     NumericMatrix old_centers = centers;
-    NumericVector Wni =
-        wni(distances_min, c1, c2,
-            s); // This function can be modified to take c++ vectors
-    weights = get_weights(
-        Wni, clusters); // This function can be modified to take c++ vectors
+    NumericVector Wni = wni(distances_min, c1, c2, s);
+    weights = get_weights(Wni, clusters);
     centers = get_new_centers(x, weights, clusters, n_clusters, distances_min);
 
     tol = max_tolerance(old_centers, centers);
