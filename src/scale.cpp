@@ -88,15 +88,11 @@ double normal_consistency_constants(int p) {
 
 // TODO: Add comment about what c1 represents
 // distance function
-//'
-//'@export
 // [[Rcpp::export]]
 double const_c1() { return 1.0; }
 
 // TODO: Add comment about what c2 represents
 // distance function
-//'
-//'@export
 // [[Rcpp::export]]
 double const_c2(std::size_t p) {
   // TODO: add comment about Maronna reference
@@ -115,33 +111,31 @@ double const_c2(std::size_t p) {
 //'
 //' @export
 // [[Rcpp::export]]
-double mscale(NumericVector u, double c, double b) {
+double mscale(NumericVector distances, double c, double b) {
 
   const double max_error_diff = 1e-10;
 
   // TODO: Indicate why dividing by 0.6745
-  double sn = median_cpp(abs(u)) / 0.6745;
+  double sn = median_cpp(abs(distances)) / 0.6745;
   if (sn == 0)
     return sn;
 
-  double diff = mean(rho_opt(u / sn, c)) - b;
+  double diff = mean(rho_opt(distances / sn, c)) - b;
   if (fabs(diff) <= max_error_diff)
     return sn;
 
   while (diff > 0.0) {
     sn = 1.5 * sn;
-    diff = mean(rho_opt(u / sn, c)) - b;
+    diff = mean(rho_opt(distances / sn, c)) - b;
   }
 
-  int i = 0;
+  unsigned int i = 0;
   double error = 1.0;
-  double Fk, Gk, factor;
-  NumericVector var;
   while ((i < 1000) & (error > max_error_diff)) {
-    var = u / sn;
-    Fk = mean(rho_opt(var, c));
-    Gk = mean(psi_opt(var, c) * var);
-    factor = (Fk - Gk - b) / (2.0 * Fk - Gk - 2.0 * b);
+    NumericVector var = distances / sn;
+    double Fk = mean(rho_opt(var, c));
+    double Gk = mean(psi_opt(var, c) * var);
+    double factor = (Fk - Gk - b) / (2.0 * Fk - Gk - 2.0 * b);
     error = fabs(factor - 1);
     sn = sn * fabs(factor);
     i += 1;

@@ -106,15 +106,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // mscale
-double mscale(NumericVector u, double c, double b);
-RcppExport SEXP _ktaucenterscpp_mscale(SEXP uSEXP, SEXP cSEXP, SEXP bSEXP) {
+double mscale(NumericVector distances, double c, double b);
+RcppExport SEXP _ktaucenterscpp_mscale(SEXP distancesSEXP, SEXP cSEXP, SEXP bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(mscale(u, c, b));
+    rcpp_result_gen = Rcpp::wrap(mscale(distances, c, b));
     return rcpp_result_gen;
 END_RCPP
 }

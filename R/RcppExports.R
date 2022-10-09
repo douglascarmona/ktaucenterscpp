@@ -76,14 +76,10 @@ normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
 
-#'
-#'@export
 const_c1 <- function() {
     .Call('_ktaucenterscpp_const_c1', PACKAGE = 'ktaucenterscpp')
 }
 
-#'
-#'@export
 const_c2 <- function(p) {
     .Call('_ktaucenterscpp_const_c2', PACKAGE = 'ktaucenterscpp', p)
 }
@@ -99,8 +95,8 @@ const_c2 <- function(p) {
 #' @return the mscale value
 #'
 #' @export
-mscale <- function(u, c, b) {
-    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, c, b)
+mscale <- function(distances, c, b) {
+    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', distances, c, b)
 }
 
 #'rho_opt function
