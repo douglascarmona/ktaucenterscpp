@@ -99,10 +99,9 @@ mscale <- function(distances, c, b) {
     .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', distances, c, b)
 }
 
-#'rho_opt function
-#'@export
-tau_scale <- function(u, c, s) {
-    .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', u, c, s)
+#'tau_scale function
+tau_scale <- function(distances, c, s) {
+    .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', distances, c, s)
 }
 
 #'Wni function

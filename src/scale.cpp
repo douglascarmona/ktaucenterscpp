@@ -144,11 +144,10 @@ double mscale(NumericVector distances, double c, double b) {
 }
 
 // TODO: Add docs
-//'rho_opt function
-//'@export
+//'tau_scale function
 // [[Rcpp::export]]
-double tau_scale(NumericVector u, double c, double s) {
-  return s * sqrt(mean(rho_opt(u / s, c)));
+double tau_scale(NumericVector distances, double c, double s) {
+  return s * sqrt(mean(rho_opt(distances / s, c)));
 }
 
 // TODO: Add docs

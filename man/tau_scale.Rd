@@ -2,10 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{tau_scale}
 \alias{tau_scale}
-\title{rho_opt function}
+\title{tau_scale function}
 \usage{
-tau_scale(u, c, s)
+tau_scale(distances, c, s)
 }
 \description{
-rho_opt function
+tau_scale function
 }
