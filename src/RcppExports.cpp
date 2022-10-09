@@ -95,12 +95,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // const_c2
-double const_c2(int p);
+double const_c2(std::size_t p);
 RcppExport SEXP _ktaucenterscpp_const_c2(SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< std::size_t >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(const_c2(p));
     return rcpp_result_gen;
 END_RCPP

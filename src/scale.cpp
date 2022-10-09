@@ -98,7 +98,7 @@ double const_c1() { return 1.0; }
 //'
 //'@export
 // [[Rcpp::export]]
-double const_c2(int p) {
+double const_c2(std::size_t p) {
   // TODO: add comment about Maronna reference
   return 2.9987 * pow(p, -0.4647);
 }

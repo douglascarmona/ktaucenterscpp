@@ -13,9 +13,9 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
                      const double tolerance, const int iter_max,
                      const std::string method) {
 
-  const int n_clusters = centers.rows();
-  const int n = x.rows();
-  const int p = x.cols();
+  const std::size_t n_clusters = centers.rows();
+  const std::size_t n = x.rows();
+  const std::size_t p = x.cols();
   const double c1 = const_c1();
   const double c2 = const_c2(p);
   // TODO: Replace and use b1 and b2 as function parameters
@@ -31,13 +31,12 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
   while (iter < iter_max && tol > tolerance) {
     // Step 1: (re)compute labels
     List dists = distance_to_centers(x, centers);
+    distances_min = dists["distances_min"];
+    clusters = dists["clusters"];
 
-    // TODO: Think a better way to replace List in c++ internal functions
-    // only use Rcpp classes for exported functions
-    distances_min = dists["min_distance"];
-    clusters = dists["membership"];
     double s = mscale(distances_min, c1, b1);
     tau = tau_scale(distances_min, c2, s);
+
     // Step 2: (re)compute centers
     NumericMatrix old_centers = centers;
     NumericVector Wni = wni(distances_min, c1, c2, s);

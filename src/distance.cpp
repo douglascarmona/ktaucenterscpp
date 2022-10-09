@@ -9,16 +9,14 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 List distance_to_centers(NumericMatrix x, NumericMatrix centers) {
   /* x is a matrix with observations(rows) and variables,
-   centers is a matrix with cluster centers coordinates (rows)
+   centers is a matrix with cluster's centers coordinates (rows)
    */
 
   const std::size_t k = centers.rows();
   const std::size_t n = x.rows();
   const std::size_t p = x.cols();
-  IntegerVector membership(
-      n); // membership vector TODO: Change initialization to Ralloc
-  NumericVector min_distance(n); // distance vector to closest center TODO:
-                                 // Change initialization to Ralloc
+  IntegerVector clusters(no_init(n));
+  NumericVector distances_min(no_init(n));
 
   for (std::size_t n_iter = 0; n_iter < n; ++n_iter) {
     double min_dist_aux = R_PosInf;
@@ -29,12 +27,12 @@ List distance_to_centers(NumericMatrix x, NumericMatrix centers) {
       }
       dist = sqrt(dist);
       if (dist < min_dist_aux) {
-        min_distance(n_iter) = dist;
-        membership(n_iter) = k_iter + 1;
+        distances_min(n_iter) = dist;
+        clusters(n_iter) = k_iter + 1;
         min_dist_aux = dist;
       }
     }
   }
-  return (List::create(_["membership"] = membership,
-                       _["min_distance"] = min_distance));
+  return (List::create(_["clusters"] = clusters,
+                       _["distances_min"] = distances_min));
 }
