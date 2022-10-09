@@ -4,8 +4,6 @@ using namespace Rcpp;
 
 // TODO: Add docs
 // distance function
-//'
-//'@export
 // [[Rcpp::export]]
 List distance_to_centers(NumericMatrix x, NumericMatrix centers) {
   /* x is a matrix with observations(rows) and variables,

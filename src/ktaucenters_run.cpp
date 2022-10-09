@@ -10,7 +10,7 @@ using namespace Rcpp;
 //'@export
 // [[Rcpp::export]]
 List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
-                     const double tolerance, const int iter_max,
+                     const double tolerance, const unsigned int iter_max,
                      const std::string method) {
 
   const std::size_t n_clusters = centers.rows();

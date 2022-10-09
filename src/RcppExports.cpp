@@ -23,7 +23,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // ktaucenters_run
-List ktaucenters_run(NumericMatrix x, NumericMatrix centers, const double tolerance, const int iter_max, const std::string method);
+List ktaucenters_run(NumericMatrix x, NumericMatrix centers, const double tolerance, const unsigned int iter_max, const std::string method);
 RcppExport SEXP _ktaucenterscpp_ktaucenters_run(SEXP xSEXP, SEXP centersSEXP, SEXP toleranceSEXP, SEXP iter_maxSEXP, SEXP methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31,7 +31,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
     Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    Rcpp::traits::input_parameter< const int >::type iter_max(iter_maxSEXP);
+    Rcpp::traits::input_parameter< const unsigned int >::type iter_max(iter_maxSEXP);
     Rcpp::traits::input_parameter< const std::string >::type method(methodSEXP);
     rcpp_result_gen = Rcpp::wrap(ktaucenters_run(x, centers, tolerance, iter_max, method));
     return rcpp_result_gen;
