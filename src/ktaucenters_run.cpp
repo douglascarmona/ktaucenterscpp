@@ -41,7 +41,7 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
     NumericMatrix old_centers = centers;
     NumericVector Wni = wni(distances_min, c1, c2, s);
     weights = get_weights(Wni, clusters);
-    centers = get_new_centers(x, weights, clusters, n_clusters, distances_min);
+    centers = get_new_centers(x, weights, clusters, distances_min);
 
     tol = max_tolerance(old_centers, centers);
     iter += 1;

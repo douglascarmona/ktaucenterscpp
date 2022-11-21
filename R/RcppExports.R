@@ -70,8 +70,6 @@ derpsi_opt <- function(t, c) {
 #'[2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008).
 #'The fast-tau estimator for regression.
 #'Journal of Computational and Graphical Statistics, 17(3), 659-682.
-#'
-#'@export
 normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
@@ -105,21 +103,16 @@ tau_scale <- function(distances, c, s) {
 }
 
 #'Wni function
-#'@export
-wni <- function(u, c1, c2, s) {
-    .Call('_ktaucenterscpp_wni', PACKAGE = 'ktaucenterscpp', u, c1, c2, s)
+wni <- function(distances, c1, c2, s) {
+    .Call('_ktaucenterscpp_wni', PACKAGE = 'ktaucenterscpp', distances, c1, c2, s)
 }
 
-#'
-#'@export
 get_weights <- function(x, clusters) {
     .Call('_ktaucenterscpp_get_weights', PACKAGE = 'ktaucenterscpp', x, clusters)
 }
 
-#'
-#'@export
-get_new_centers <- function(x, weights, clusters, n_clusters, distances_min) {
-    .Call('_ktaucenterscpp_get_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, n_clusters, distances_min)
+get_new_centers <- function(x, weights, clusters, distances_min) {
+    .Call('_ktaucenterscpp_get_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, distances_min)
 }
 
 #'

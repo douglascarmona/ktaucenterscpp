@@ -132,16 +132,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // wni
-NumericVector wni(NumericVector u, double c1, double c2, double s);
-RcppExport SEXP _ktaucenterscpp_wni(SEXP uSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP) {
+NumericVector wni(NumericVector distances, double c1, double c2, double s);
+RcppExport SEXP _ktaucenterscpp_wni(SEXP distancesSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
     Rcpp::traits::input_parameter< double >::type c1(c1SEXP);
     Rcpp::traits::input_parameter< double >::type c2(c2SEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(wni(u, c1, c2, s));
+    rcpp_result_gen = Rcpp::wrap(wni(distances, c1, c2, s));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -158,28 +158,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_new_centers
-NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights, IntegerVector clusters, const int n_clusters, NumericVector distances_min);
-RcppExport SEXP _ktaucenterscpp_get_new_centers(SEXP xSEXP, SEXP weightsSEXP, SEXP clustersSEXP, SEXP n_clustersSEXP, SEXP distances_minSEXP) {
+NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights, IntegerVector clusters, NumericVector distances_min);
+RcppExport SEXP _ktaucenterscpp_get_new_centers(SEXP xSEXP, SEXP weightsSEXP, SEXP clustersSEXP, SEXP distances_minSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type clusters(clustersSEXP);
-    Rcpp::traits::input_parameter< const int >::type n_clusters(n_clustersSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type distances_min(distances_minSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_new_centers(x, weights, clusters, n_clusters, distances_min));
+    rcpp_result_gen = Rcpp::wrap(get_new_centers(x, weights, clusters, distances_min));
     return rcpp_result_gen;
 END_RCPP
 }
 // tabulatecpp
-IntegerVector tabulatecpp(IntegerVector x, const unsigned max);
+IntegerVector tabulatecpp(IntegerVector x, const std::size_t max);
 RcppExport SEXP _ktaucenterscpp_tabulatecpp(SEXP xSEXP, SEXP maxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const unsigned >::type max(maxSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type max(maxSEXP);
     rcpp_result_gen = Rcpp::wrap(tabulatecpp(x, max));
     return rcpp_result_gen;
 END_RCPP
@@ -233,7 +232,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 3},
     {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 4},
     {"_ktaucenterscpp_get_weights", (DL_FUNC) &_ktaucenterscpp_get_weights, 2},
-    {"_ktaucenterscpp_get_new_centers", (DL_FUNC) &_ktaucenterscpp_get_new_centers, 5},
+    {"_ktaucenterscpp_get_new_centers", (DL_FUNC) &_ktaucenterscpp_get_new_centers, 4},
     {"_ktaucenterscpp_tabulatecpp", (DL_FUNC) &_ktaucenterscpp_tabulatecpp, 2},
     {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
     {"_ktaucenterscpp_top_index", (DL_FUNC) &_ktaucenterscpp_top_index, 2},

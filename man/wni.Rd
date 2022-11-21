@@ -4,7 +4,7 @@
 \alias{wni}
 \title{Wni function}
 \usage{
-wni(u, c1, c2, s)
+wni(distances, c1, c2, s)
 }
 \description{
 Wni function
