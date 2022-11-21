@@ -17,9 +17,9 @@ using namespace Rcpp;
 //'@export
 // [[Rcpp::export]]
 NumericVector rho_opt(NumericVector t, double c) {
-  NumericVector out(Rf_allocVector(REALSXP, t.size()));
+  NumericVector out(no_init(t.size()));
 
-  R_xlen_t idx = 0;
+  std::size_t idx = 0;
   for (const auto &t_it : t) {
     if (fabs(t_it) <= 2 * c) {
       out[idx] = 0.5 * pow(t_it, 2) / (3.25 * pow(c, 2));
@@ -50,9 +50,9 @@ NumericVector rho_opt(NumericVector t, double c) {
 //'@export
 // [[Rcpp::export]]
 NumericVector psi_opt(NumericVector t, double c) {
-  NumericVector out(Rf_allocVector(REALSXP, t.size()));
+  NumericVector out(no_init(t.size()));
 
-  R_xlen_t idx = 0;
+  std::size_t idx = 0;
   for (const auto &t_it : t) {
     if (fabs(t_it) <= 2 * c) {
       out[idx] = t_it / (3.25 * pow(c, 2));
@@ -81,9 +81,9 @@ NumericVector psi_opt(NumericVector t, double c) {
 //' @export
 // [[Rcpp::export]]
 NumericVector derpsi_opt(NumericVector t, double c) {
-  NumericVector out(Rf_allocVector(REALSXP, t.size()));
+  NumericVector out(no_init(t.size()));
 
-  R_xlen_t idx = 0;
+  std::size_t idx = 0;
   for (const auto &t_it : t) {
     if (fabs(t_it) <= 2 * c) {
       out[idx] = 1.0 / (3.25 * pow(c, 2));
