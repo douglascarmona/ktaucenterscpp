@@ -19,8 +19,6 @@ using namespace Rcpp;
 //'[2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008).
 //'The fast-tau estimator for regression.
 //'Journal of Computational and Graphical Statistics, 17(3), 659-682.
-//'
-//'@export
 // [[Rcpp::export]]
 double normal_consistency_constants(int p) {
   // TODO: Replace hard coded values with function
@@ -152,51 +150,42 @@ double tau_scale(NumericVector distances, double c, double s) {
 
 // TODO: Add docs
 //'Wni function
-//'@export
 // [[Rcpp::export]]
-NumericVector wni(NumericVector u, double c1, double c2, double s) {
+NumericVector wni(NumericVector distances, double c1, double c2, double s) {
 
-  NumericVector dnor = u / s;
+  NumericVector dnor = distances / s;
   double A = sum(2 * rho_opt(dnor, c2) - psi_opt(dnor, c2) * dnor);
   double B = sum(psi_opt(dnor, c1) * dnor);
-  return ifelse(u == 0.0, A * derpsi_opt(0.0, c1) + B * derpsi_opt(0.0, c2),
+  return ifelse(distances == 0.0,
+                (A / (3.25 * pow(c1, 2))) + (B / (3.25 * pow(c2, 2))),
                 (A * psi_opt(dnor, c1) + B * psi_opt(dnor, c2)) / dnor);
 }
 
 // TODO: Add docs
 // total_wni_by_cluster function
-//'
-//'@export
 // [[Rcpp::export]]
 NumericVector get_weights(NumericVector x, IntegerVector clusters) {
-  // TODO: Add check for both vectors having same size
-  // TODO: Think better way to count numbers of unique values in grouping
-  const int n_cluster = unique(clusters).size();
-  NumericVector out(Rf_allocVector(REALSXP, x.size()));
-  NumericVector sum_wni(n_cluster, 0.0);
-  IntegerVector count_cluster(n_cluster, 0.0);
 
-  // Reescribir el for loop usando este metodo
-
-  // for(it = x.begin(), out_it = out.begin(); it != x.end();
-  //     ++it, ++out_it)
-
-  int idx = 0;
-  for (const auto &cluster_it : clusters) {
-    sum_wni[cluster_it - 1] += x[idx];
-    count_cluster[cluster_it - 1] += 1;
-    ++idx;
+  if (x.size() != clusters.size()) {
+    stop("Both x and clusters must have same size.");
   }
 
-  // TODO: This can we rewrite with stl::transform
-  idx = 0;
-  for (const auto &cluster_it : clusters) {
-    if (sum_wni[cluster_it - 1] != 0.0) {
-      out[idx] = x[idx] / sum_wni[cluster_it - 1];
+  const std::size_t n_cluster = unique(clusters).size();
+  NumericVector out(no_init(x.size()));
+  NumericVector wni_sum(n_cluster);
+  IntegerVector clusters_count(n_cluster);
+
+  for (std::size_t idx = 0; idx != x.size(); ++idx) {
+    wni_sum[clusters[idx] - 1] += x[idx];
+    clusters_count[clusters[idx] - 1] += 1;
+  }
+
+  for (std::size_t idx = 0; idx != x.size(); ++idx) {
+    if (wni_sum[clusters[idx] - 1] != 0.0) {
+      out[idx] = x[idx] / wni_sum[clusters[idx] - 1];
     } else {
-      out[idx] = 1 / count_cluster[cluster_it - 1];
+      out[idx] = 1.0 / clusters_count[clusters[idx] - 1];
     }
-    ++idx;
   }
 
   return out;
@@ -204,37 +193,35 @@ NumericVector get_weights(NumericVector x, IntegerVector clusters) {
 
 // TODO: Add docs
 // get_new_centers function
-//'
-//'@export
 // [[Rcpp::export]]
 NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
-                              IntegerVector clusters, const int n_clusters,
+                              IntegerVector clusters,
                               NumericVector distances_min) {
-  const int p = x.cols();
-  const int n = x.rows();
+
+  const std::size_t n_clusters = unique(clusters).size();
+  const std::size_t p = x.cols();
+  const std::size_t n = x.rows();
 
   NumericMatrix out(n_clusters, p);
 
-  for (int column = 0; column != p; ++column) {
-    NumericVector tmp(Rf_allocVector(REALSXP, n));
-    for (int row = 0; row != n; ++row) {
+  for (std::size_t column = 0; column != p; ++column) {
+    NumericVector tmp(no_init(n));
+    for (std::size_t row = 0; row != n; ++row) {
       tmp[row] = x(row, column) * weights[row];
     }
 
     NumericVector sums(n_clusters, 0.0);
 
-    // Reescribir el for loop usando este metodo
+    // Rewriteloop using this method
 
     // for(it = x.begin(), out_it = out.begin(); it != x.end();
     //     ++it, ++out_it)
 
-    int idx = 0;
-    for (const auto &cluster_it : clusters) {
-      sums[cluster_it - 1] += tmp[idx];
-      ++idx;
+    for (std::size_t idx = 0; idx != clusters.size(); ++idx) {
+      sums[clusters[idx] - 1] += tmp[idx];
     }
 
-    for (const auto &cluster_it : clusters) {
+    for (auto &cluster_it : clusters) {
       out(cluster_it - 1, column) = sums[cluster_it - 1];
     }
   }
@@ -242,8 +229,8 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
   LogicalVector empty_clusters = tabulatecpp(clusters, n_clusters) == 0;
 
   if (any(empty_clusters).is_true()) {
-    IntegerVector empty_pos;
-    for (int i = 0; i < empty_clusters.size(); i++) {
+    std::vector<int> empty_pos;
+    for (std::size_t i = 0; i < empty_clusters.size(); ++i) {
       if (empty_clusters[i]) {
         empty_pos.push_back(i);
       }
@@ -251,9 +238,9 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
 
     IntegerVector furthest_indices = top_index(distances_min, empty_pos.size());
 
-    for (int column = 0; column != p; ++column) {
-      int idx = 0;
-      for (const auto &position : empty_pos) {
+    for (std::size_t column = 0; column != p; ++column) {
+      std::size_t idx = 0;
+      for (auto &position : empty_pos) {
         out(position, column) = x(furthest_indices[idx], column);
         ++idx;
       }

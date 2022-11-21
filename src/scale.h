@@ -13,6 +13,6 @@ double tau_scale(NumericVector, double, double);
 NumericVector wni(NumericVector, double, double, double);
 NumericVector get_weights(NumericVector, IntegerVector);
 NumericMatrix get_new_centers(NumericMatrix, NumericVector, IntegerVector,
-                              const int, NumericVector);
+                              NumericVector);
 
 #endif
