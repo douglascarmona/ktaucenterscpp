@@ -52,11 +52,11 @@ using namespace Rcpp;
 //'
 //'@export
 // [[Rcpp::export]]
-IntegerVector tabulatecpp(IntegerVector x, const unsigned max) {
+IntegerVector tabulatecpp(IntegerVector x, const std::size_t max) {
   IntegerVector counts(max);
   for (const auto &now : x) {
     if (now > 0 && now <= max)
-      counts[now - 1]++;
+      counts[now - 1] += 1;
   }
   return counts;
 }
