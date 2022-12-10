@@ -36,7 +36,7 @@ List cluster_location(NumericMatrix x, NumericMatrix centers) {
 //' Counts observations per cluster
 //'
 //' @param cluster_location a vector containing each point observation's
-// cluster.
+//' cluster.
 //' @param n_clusters total number of clusters
 //'
 //' @return
