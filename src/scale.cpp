@@ -1,4 +1,5 @@
 #include "scale.h"
+#include "cluster.h"
 #include "rho_opt.h"
 #include "utils.h"
 #include <Rcpp.h>
@@ -226,7 +227,7 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
     }
   }
 
-  LogicalVector empty_clusters = tabulatecpp(clusters, n_clusters) == 0;
+  LogicalVector empty_clusters = cluster_counter(clusters, n_clusters) == 0;
 
   if (any(empty_clusters).is_true()) {
     std::vector<int> empty_pos;
@@ -236,7 +237,8 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
       }
     }
 
-    IntegerVector furthest_indices = top_index(distances_min, empty_pos.size());
+    IntegerVector furthest_indices =
+        top_index(distances_min, empty_pos.size(), true);
 
     for (std::size_t column = 0; column != p; ++column) {
       std::size_t idx = 0;
