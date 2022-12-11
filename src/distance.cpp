@@ -2,35 +2,29 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// TODO: Add docs
-// distance function
+//' Distance Matrix Computation
+//'
+//' Computes and returns the distance matrix using euclidean distance
+//' measure to compute the distances between the rows of a
+//' data matrix.
+//'
+//' @param x a numeric matrix.
+//'
+//' @return
+//' A numeric matrix with the distances between the rows of a matrix.
+//'
 // [[Rcpp::export]]
-List distance_to_centers(NumericMatrix x, NumericMatrix centers) {
-  /* x is a matrix with observations(rows) and variables,
-   centers is a matrix with cluster's centers coordinates (rows)
-   */
+NumericMatrix distance(NumericMatrix x) {
+  const std::size_t n = x.nrow();
+  double d;
+  NumericMatrix out(no_init(n, n));
 
-  const std::size_t k = centers.rows();
-  const std::size_t n = x.rows();
-  const std::size_t p = x.cols();
-  IntegerVector clusters(no_init(n));
-  NumericVector distances_min(no_init(n));
-
-  for (std::size_t n_iter = 0; n_iter < n; ++n_iter) {
-    double min_dist_aux = R_PosInf;
-    for (std::size_t k_iter = 0; k_iter < k; ++k_iter) {
-      double dist = 0.0;
-      for (std::size_t p_iter = 0; p_iter < p; ++p_iter) {
-        dist += pow(x(n_iter, p_iter) - centers(k_iter, p_iter), 2);
-      }
-      dist = sqrt(dist);
-      if (dist < min_dist_aux) {
-        distances_min(n_iter) = dist;
-        clusters(n_iter) = k_iter + 1;
-        min_dist_aux = dist;
-      }
+  for (std::size_t i = 0; i < n - 1; ++i) {
+    for (std::size_t j = i + 1; j < n; ++j) {
+      d = sqrt(sum(pow(x.row(i) - x.row(j), 2.0)));
+      out(j, i) = d;
+      out(i, j) = d;
     }
   }
-  return (List::create(_["clusters"] = clusters,
-                       _["distances_min"] = distances_min));
+  return out;
 }
