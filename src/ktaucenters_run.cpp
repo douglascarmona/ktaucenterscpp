@@ -1,4 +1,4 @@
-#include "distance.h"
+#include "cluster.h"
 #include "scale.h"
 #include "utils.h"
 #include <Rcpp.h>
@@ -25,30 +25,29 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
   int iter = 0;
   double tol = tolerance + 1.0;
   NumericVector weights(n);
-  NumericVector distances_min(n);
+  NumericVector distance_min(n);
   IntegerVector clusters(n);
   double tau;
   while (iter < iter_max && tol > tolerance) {
     // Step 1: (re)compute labels
-    List dists = distance_to_centers(x, centers);
-    distances_min = dists["distances_min"];
-    clusters = dists["clusters"];
+    List cluster_loc = cluster_location(x, centers);
+    distance_min = cluster_loc["distance"];
+    clusters = cluster_loc["clusters"];
 
-    double s = mscale(distances_min, c1, b1);
-    tau = tau_scale(distances_min, c2, s);
+    double s = mscale(distance_min, c1, b1);
+    tau = tau_scale(distance_min, c2, s);
 
     // Step 2: (re)compute centers
     NumericMatrix old_centers = centers;
-    NumericVector Wni = wni(distances_min, c1, c2, s);
+    NumericVector Wni = wni(distance_min, c1, c2, s);
     weights = get_weights(Wni, clusters);
-    centers = get_new_centers(x, weights, clusters, distances_min);
+    centers = get_new_centers(x, weights, clusters, distance_min);
 
     tol = max_tolerance(old_centers, centers);
     iter += 1;
   }
 
-  return (List::create(_["tau"] = tau, _["iter"] = iter,
-                       _["di"] = distances_min, _["centers"] = centers,
-                       _["clusters"] = clusters, _["p"] = p,
-                       _["weights"] = weights));
+  return (List::create(_["tau"] = tau, _["iter"] = iter, _["di"] = distance_min,
+                       _["centers"] = centers, _["clusters"] = clusters,
+                       _["p"] = p, _["weights"] = weights));
 }
