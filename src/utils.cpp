@@ -22,9 +22,9 @@ public:
     if (decreasing) {
       // Ties: If there are ties, then the first value is returned and the other
       // one is ignored.
-      return data[i] > data[j] || (data[i] == data[j] && j > i);
+      return data[i] > data[j] || (data[i] == data[j] && j < i);
     } else {
-      return data[i] < data[j] || (data[i] == data[j] && j > i);
+      return data[i] < data[j] || (data[i] == data[j] && j < i);
     }
   }
 
