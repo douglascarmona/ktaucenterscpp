@@ -118,8 +118,8 @@ List robinden(NumericMatrix D, const std::size_t k, const std::size_t mp) {
   const double crit_robin = cloned_idp[nth_element - 1];
 
   // Start with a point with maximum density
-  const std::size_t min_idx = top_index(idp, 1, false)[0];
-  IntegerVector sorted_idxs = top_index(D(_, min_idx), n, true);
+  std::size_t min_idx = which_min(idp);
+  IntegerVector sorted_idxs = top_index(D.column(min_idx), n, true);
 
   IntegerVector centers(no_init(k));
   centers[0] = robin_center(idp, sorted_idxs, crit_robin);
