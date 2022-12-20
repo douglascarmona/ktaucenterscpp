@@ -134,15 +134,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // robinden
-List robinden(NumericMatrix D, const std::size_t k, const std::size_t mp);
-RcppExport SEXP _ktaucenterscpp_robinden(SEXP DSEXP, SEXP kSEXP, SEXP mpSEXP) {
+List robinden(NumericMatrix D, const std::size_t n_clusters, const std::size_t mp);
+RcppExport SEXP _ktaucenterscpp_robinden(SEXP DSEXP, SEXP n_clustersSEXP, SEXP mpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type D(DSEXP);
-    Rcpp::traits::input_parameter< const std::size_t >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const std::size_t >::type n_clusters(n_clustersSEXP);
     Rcpp::traits::input_parameter< const std::size_t >::type mp(mpSEXP);
-    rcpp_result_gen = Rcpp::wrap(robinden(D, k, mp));
+    rcpp_result_gen = Rcpp::wrap(robinden(D, n_clusters, mp));
     return rcpp_result_gen;
 END_RCPP
 }

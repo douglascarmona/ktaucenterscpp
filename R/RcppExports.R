@@ -41,6 +41,7 @@ cluster_counter <- function(cluster_location, n_clusters) {
 #' @return
 #' A numeric matrix with the distances between the rows of a matrix.
 #'
+#'@export
 distance <- function(x) {
     .Call('_ktaucenterscpp_distance', PACKAGE = 'ktaucenterscpp', x)
 }
@@ -170,8 +171,8 @@ robin_center <- function(idp, indexes, crit_robin) {
 #' 30(11), 994-1002, 2009.
 #'
 #'@export
-robinden <- function(D, k, mp) {
-    .Call('_ktaucenterscpp_robinden', PACKAGE = 'ktaucenterscpp', D, k, mp)
+robinden <- function(D, n_clusters, mp) {
+    .Call('_ktaucenterscpp_robinden', PACKAGE = 'ktaucenterscpp', D, n_clusters, mp)
 }
 
 #'normal_consistency_constants

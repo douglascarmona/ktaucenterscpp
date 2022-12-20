@@ -4,15 +4,15 @@
 \alias{robinden}
 \title{Robust Initialization based on Inverse Density estimator (ROBINDEN)}
 \usage{
-robinden(D, k, mp)
+robinden(D, n_clusters, mp)
 }
 \arguments{
 \item{D}{a distance matrix, which contains the distances between the rows of
 a matrix.}
 
-\item{k}{number of cluster centers to find.}
-
 \item{mp}{number of nearest neighbors to find dense regions by LOF}
+
+\item{k}{number of cluster centers to find.}
 }
 \value{
 A list with the following components:
