@@ -22,6 +22,7 @@ NumericMatrix distance(NumericMatrix x) {
   for (std::size_t i = 0; i < n - 1; ++i) {
     for (std::size_t j = i + 1; j < n; ++j) {
       d = sqrt(sum(pow(x.row(i) - x.row(j), 2.0)));
+      out(i, i) = 0.0;
       out(j, i) = d;
       out(i, j) = d;
     }

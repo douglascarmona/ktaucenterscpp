@@ -41,7 +41,6 @@ cluster_counter <- function(cluster_location, n_clusters) {
 #' @return
 #' A numeric matrix with the distances between the rows of a matrix.
 #'
-#'@export
 distance <- function(x) {
     .Call('_ktaucenterscpp_distance', PACKAGE = 'ktaucenterscpp', x)
 }
