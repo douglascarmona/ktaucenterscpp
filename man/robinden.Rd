@@ -10,9 +10,9 @@ robinden(D, n_clusters, mp)
 \item{D}{a distance matrix, which contains the distances between the rows of
 a matrix.}
 
-\item{mp}{number of nearest neighbors to find dense regions by LOF}
+\item{n_clusters}{number of cluster centers to find.}
 
-\item{k}{number of cluster centers to find.}
+\item{mp}{number of nearest neighbors to find dense regions by LOF}
 }
 \value{
 A list with the following components:
