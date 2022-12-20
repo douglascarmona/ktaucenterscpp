@@ -44,29 +44,19 @@ NumericVector point_density(NumericMatrix D, const std::size_t k) {
 // [[Rcpp::export]]
 std::size_t robin_center(NumericVector idp, IntegerVector indexes,
                          const double crit_robin) {
-  const std::size_t size = idp.size();
-  NumericVector idp_sort_points = idp[indexes];
-  bool flag = false;
-  std::size_t id;
-  NumericVector diff(no_init(size));
 
-  for (std::size_t i = 0; i < size; ++i) {
-    diff[i] = idp_sort_points[i] - crit_robin;
+  NumericVector idp_sorted_points = idp[indexes];
 
-    if (idp_sort_points[i] <= crit_robin) {
-      id = i;
-      flag = true;
-      break;
-    }
+  // Sometimes all idp_sorted_points are greater than the
+  // crit_robin value, then we take the nearest point to crit_robin
+  LogicalVector comp = idp_sorted_points <= crit_robin;
+
+  if (is_true(any(comp))) {
+    IntegerVector tmp = indexes[comp];
+    return tmp[0];
+  } else {
+    return indexes[which_min(idp_sorted_points - crit_robin)];
   }
-
-  if (flag == false) {
-    // Sometimes all idp_sort_points are greater than the
-    // crit_robin value, then we take the nearest point to crit_robin
-    id = which_min(diff);
-  }
-
-  return indexes[id];
 }
 
 //' Robust Initialization based on Inverse Density estimator (ROBINDEN)
@@ -101,40 +91,43 @@ std::size_t robin_center(NumericVector idp, IntegerVector indexes,
 //'
 //'@export
 // [[Rcpp::export]]
-List robinden(NumericMatrix D, const std::size_t k, const std::size_t mp) {
+List robinden(NumericMatrix D, const std::size_t n_clusters,
+              const std::size_t mp) {
 
   const std::size_t n = D.nrow();
 
-  NumericVector idp = 1 / point_density(D, mp);
+  // Compute the inverse density points.
+  NumericVector idp = 1.0 / point_density(D, mp);
 
-  // Outliers have a high idp value. In unbalanced cases and when k increases,
-  // all the observations from a group might be above the crit_robin.
-  // So we need to increase the crit_robin in order to avoid two initials
-  // centers from the same group.
-  NumericVector cloned_idp = clone(idp);
-  const int nth_element = trunc(std::max(0.5, 0.96 * (1 - (1.5 / k))) * n);
-  std::nth_element(cloned_idp.begin(), cloned_idp.begin() + nth_element - 1,
-                   cloned_idp.end());
-  const double crit_robin = cloned_idp[nth_element - 1];
+  // Outliers have a high idp value. In unbalanced cases and when the number of
+  // clusters increases, all the observations from a group might be above the
+  // crit_robin. So we need to increase the crit_robin in order to
+  // avoid two initials centers from the same group.
+
+  // Minus 1 to get 0 based index
+  const std::size_t position =
+      trunc(std::max(0.5, 0.96 * (1 - (1.5 / n_clusters))) * n) - 1;
+  NumericVector sorted_idp = clone(idp).sort(false);
+  const double crit_robin = sorted_idp[position];
 
   // Start with a point with maximum density
-  std::size_t min_idx = which_min(idp);
-  IntegerVector sorted_idxs = top_index(D.column(min_idx), n, true);
+  std::size_t r = which_min(idp);
+  IntegerVector sorted_idxs = top_index(D.column(r), n, true);
 
-  IntegerVector centers(no_init(k));
+  IntegerVector centers(n_clusters);
   centers[0] = robin_center(idp, sorted_idxs, crit_robin);
 
-  for (std ::size_t m = 1; m < k; ++m) {
+  for (std ::size_t iter = 1; iter < n_clusters; ++iter) {
     NumericVector minimum_values(no_init(n));
 
     for (std::size_t column = 0; column < n; ++column) {
       NumericVector c = D.column(column);
-      NumericVector tmp = c[centers[Range(0, m - 1)]];
+      NumericVector tmp = c[centers[Range(0, iter - 1)]];
       minimum_values[column] = min(tmp);
     }
 
     sorted_idxs = top_index(minimum_values, n, true);
-    centers[m] = robin_center(idp, sorted_idxs, crit_robin);
+    centers[iter] = robin_center(idp, sorted_idxs, crit_robin);
   }
   return List::create(_["centers"] = centers, _["idpoints"] = idp);
 }
