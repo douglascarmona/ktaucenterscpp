@@ -19,8 +19,8 @@ cluster_location <- function(x, centers) {
 
 #' Counts observations per cluster
 #'
-#' @param cluster_location a vector containing each point observation's
-#' cluster.
+#' @param cluster_location a vector with positive intergers containing each
+#' point observation's ' cluster.
 #' @param n_clusters total number of clusters
 #'
 #' @return
@@ -145,7 +145,7 @@ robin_center <- function(idp, indexes, crit_robin) {
 #'
 #' @param D a distance matrix, which contains the distances between the rows of
 #' a matrix.
-#' @param k number of cluster centers to find.
+#' @param n_clusters number of cluster centers to find.
 #' @param mp number of nearest neighbors to find dense regions by LOF
 #'
 #' @return A list with the following components:

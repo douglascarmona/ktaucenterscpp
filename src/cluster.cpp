@@ -33,10 +33,10 @@ List cluster_location(NumericMatrix x, NumericMatrix centers) {
   return List::create(_["clusters"] = clusters, _["distance"] = distance);
 }
 
-//' Counts observations per cluster
+//' Counts the number of observations per cluster
 //'
-//' @param cluster_location a vector containing each point observation's
-//' cluster.
+//' @param cluster_location a vector with positive intergers containing each
+//' point observation's cluster.
 //' @param n_clusters total number of clusters
 //'
 //' @return
@@ -45,7 +45,7 @@ List cluster_location(NumericMatrix x, NumericMatrix centers) {
 // [[Rcpp::export]]
 IntegerVector cluster_counter(IntegerVector cluster_location,
                               const std::size_t n_clusters) {
-  IntegerVector counter(no_init(n_clusters));
+  IntegerVector counter(n_clusters);
   for (const auto &obs_cluster : cluster_location) {
     if (obs_cluster > 0 && obs_cluster <= n_clusters)
       counter[obs_cluster - 1] += 1;

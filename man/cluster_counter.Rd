@@ -7,8 +7,8 @@
 cluster_counter(cluster_location, n_clusters)
 }
 \arguments{
-\item{cluster_location}{a vector containing each point observation's
-cluster.}
+\item{cluster_location}{a vector with positive intergers containing each
+point observation's ' cluster.}
 
 \item{n_clusters}{total number of clusters}
 }
