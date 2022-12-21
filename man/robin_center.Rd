@@ -4,12 +4,12 @@
 \alias{robin_center}
 \title{Utility function to estimate robinden center}
 \usage{
-robin_center(idp, indexes, crit_robin)
+robin_center(idp, indices, crit_robin)
 }
 \arguments{
 \item{idp}{a vector with containing the inverse density each point.}
 
-\item{indexes}{vector with sorted indexes.}
+\item{indices}{vector with sorted indices.}
 
 \item{crit_robin}{critical robin value.}
 }

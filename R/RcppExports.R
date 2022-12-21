@@ -17,10 +17,10 @@ cluster_location <- function(x, centers) {
     .Call('_ktaucenterscpp_cluster_location', PACKAGE = 'ktaucenterscpp', x, centers)
 }
 
-#' Counts observations per cluster
+#' Counts the number of observations per cluster
 #'
 #' @param cluster_location a vector with positive intergers containing each
-#' point observation's ' cluster.
+#' point observation's cluster.
 #' @param n_clusters total number of clusters
 #'
 #' @return
@@ -56,7 +56,7 @@ distance <- function(x) {
 #'
 #' @return A list with the following components:
 #' \item{dist }{a matrix with distances. }
-#' \item{id }{a matrix with indexes of the k nearest neighbors. }
+#' \item{id }{a matrix with indices of the k nearest neighbors. }
 #' \item{k }{number neighbors used. }
 #'
 dist_to_kNN <- function(D, k) {
@@ -129,14 +129,14 @@ point_density <- function(D, k) {
 #' Utility function to estimate robinden center
 #'
 #' @param idp a vector with containing the inverse density each point.
-#' @param indexes vector with sorted indexes.
+#' @param indices vector with sorted indices.
 #' @param crit_robin critical robin value.
 #'
 #' @return
 #' Index of the cluster center
 #'
-robin_center <- function(idp, indexes, crit_robin) {
-    .Call('_ktaucenterscpp_robin_center', PACKAGE = 'ktaucenterscpp', idp, indexes, crit_robin)
+robin_center <- function(idp, indices, crit_robin) {
+    .Call('_ktaucenterscpp_robin_center', PACKAGE = 'ktaucenterscpp', idp, indices, crit_robin)
 }
 
 #' Robust Initialization based on Inverse Density estimator (ROBINDEN)
@@ -149,8 +149,7 @@ robin_center <- function(idp, indexes, crit_robin) {
 #' @param mp number of nearest neighbors to find dense regions by LOF
 #'
 #' @return A list with the following components:
-#' \item{centers }{A numeric vector with initial cluster centers indexes
-#' centers}
+#' \item{centers }{A numeric vector with the initial cluster centers indices}
 #' \item{idpoints }{A real vector containing the inverse of point density
 #' estimation}
 #'
@@ -239,15 +238,15 @@ median_cpp <- function(x) {
     .Call('_ktaucenterscpp_median_cpp', PACKAGE = 'ktaucenterscpp', x)
 }
 
-#' Find the first nth indexes from a vector
+#' Find the first nth indices from a vector
 #'
-#' @param v a numeric vector from which indexes are found.
-#' @param n number of indexes to find.
+#' @param v a numeric vector from which indices are found.
+#' @param n number of indices to find.
 #' @param decreasing boolean value indicating if the vector must be in
 #' decreasing order
 #'
 #' @return
-#' A vector with first nth indexes.
+#' A vector with first nth indices.
 #'
 top_index <- function(v, n, decreasing) {
     .Call('_ktaucenterscpp_top_index', PACKAGE = 'ktaucenterscpp', v, n, decreasing)

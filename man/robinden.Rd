@@ -16,8 +16,7 @@ a matrix.}
 }
 \value{
 A list with the following components:
-\item{centers }{A numeric vector with initial cluster centers indexes
-centers}
+\item{centers }{A numeric vector with the initial cluster centers indices}
 \item{idpoints }{A real vector containing the inverse of point density
 estimation}
 }

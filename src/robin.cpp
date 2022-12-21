@@ -35,27 +35,27 @@ NumericVector point_density(NumericMatrix D, const std::size_t k) {
 //' Utility function to estimate robinden center
 //'
 //' @param idp a vector with containing the inverse density each point.
-//' @param indexes vector with sorted indexes.
+//' @param indices vector with sorted indices.
 //' @param crit_robin critical robin value.
 //'
 //' @return
 //' Index of the cluster center
 //'
 // [[Rcpp::export]]
-std::size_t robin_center(NumericVector idp, IntegerVector indexes,
+std::size_t robin_center(NumericVector idp, IntegerVector indices,
                          const double crit_robin) {
 
-  NumericVector idp_sorted_points = idp[indexes];
+  NumericVector idp_sorted_points = idp[indices];
 
   // Sometimes all idp_sorted_points are greater than the
   // crit_robin value, then we take the nearest point to crit_robin
   LogicalVector comp = idp_sorted_points <= crit_robin;
 
   if (is_true(any(comp))) {
-    IntegerVector tmp = indexes[comp];
+    IntegerVector tmp = indices[comp];
     return tmp[0];
   } else {
-    return indexes[which_min(idp_sorted_points - crit_robin)];
+    return indices[which_min(idp_sorted_points - crit_robin)];
   }
 }
 
@@ -69,8 +69,7 @@ std::size_t robin_center(NumericVector idp, IntegerVector indexes,
 //' @param mp number of nearest neighbors to find dense regions by LOF
 //'
 //' @return A list with the following components:
-//' \item{centers }{A numeric vector with initial cluster centers indexes
-//' centers}
+//' \item{centers }{A numeric vector with the initial cluster centers indices}
 //' \item{idpoints }{A real vector containing the inverse of point density
 //' estimation}
 //'
@@ -112,10 +111,10 @@ List robinden(NumericMatrix D, const std::size_t n_clusters,
 
   // Start with a point with maximum density
   std::size_t r = which_min(idp);
-  IntegerVector sorted_idxs = top_index(D.column(r), n, true);
+  IntegerVector sorted_indices = top_index(D.column(r), n, true);
 
   IntegerVector centers(n_clusters);
-  centers[0] = robin_center(idp, sorted_idxs, crit_robin);
+  centers[0] = robin_center(idp, sorted_indices, crit_robin);
 
   for (std ::size_t iter = 1; iter < n_clusters; ++iter) {
     NumericVector minimum_values(no_init(n));
@@ -126,8 +125,8 @@ List robinden(NumericMatrix D, const std::size_t n_clusters,
       minimum_values[column] = min(tmp);
     }
 
-    sorted_idxs = top_index(minimum_values, n, true);
-    centers[iter] = robin_center(idp, sorted_idxs, crit_robin);
+    sorted_indices = top_index(minimum_values, n, true);
+    centers[iter] = robin_center(idp, sorted_indices, crit_robin);
   }
   return List::create(_["centers"] = centers, _["idpoints"] = idp);
 }

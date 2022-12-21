@@ -2,13 +2,13 @@
 % Please edit documentation in R/RcppExports.R
 \name{cluster_counter}
 \alias{cluster_counter}
-\title{Counts observations per cluster}
+\title{Counts the number of observations per cluster}
 \usage{
 cluster_counter(cluster_location, n_clusters)
 }
 \arguments{
 \item{cluster_location}{a vector with positive intergers containing each
-point observation's ' cluster.}
+point observation's cluster.}
 
 \item{n_clusters}{total number of clusters}
 }
@@ -16,5 +16,5 @@ point observation's ' cluster.}
 Vector with number of observations per cluster
 }
 \description{
-Counts observations per cluster
+Counts the number of observations per cluster
 }

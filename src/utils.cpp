@@ -66,15 +66,15 @@ private:
   NumericVector data;
 };
 
-//' Find the first nth indexes from a vector
+//' Find the first nth indices from a vector
 //'
-//' @param v a numeric vector from which indexes are found.
-//' @param n number of indexes to find.
+//' @param v a numeric vector from which indices are found.
+//' @param n number of indices to find.
 //' @param decreasing boolean value indicating if the vector must be in
 //' decreasing order
 //'
 //' @return
-//' A vector with first nth indexes.
+//' A vector with first nth indices.
 //'
 // [[Rcpp::export]]
 IntegerVector top_index(NumericVector v, int n, bool decreasing) {

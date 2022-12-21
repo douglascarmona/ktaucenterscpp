@@ -2,21 +2,21 @@
 % Please edit documentation in R/RcppExports.R
 \name{top_index}
 \alias{top_index}
-\title{Find the first nth indexes from a vector}
+\title{Find the first nth indices from a vector}
 \usage{
 top_index(v, n, decreasing)
 }
 \arguments{
-\item{v}{a numeric vector from which indexes are found.}
+\item{v}{a numeric vector from which indices are found.}
 
-\item{n}{number of indexes to find.}
+\item{n}{number of indices to find.}
 
 \item{decreasing}{boolean value indicating if the vector must be in
 decreasing order}
 }
 \value{
-A vector with first nth indexes.
+A vector with first nth indices.
 }
 \description{
-Find the first nth indexes from a vector
+Find the first nth indices from a vector
 }

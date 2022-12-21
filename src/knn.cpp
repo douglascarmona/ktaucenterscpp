@@ -13,7 +13,7 @@ using namespace Rcpp;
 //'
 //' @return A list with the following components:
 //' \item{dist }{a matrix with distances. }
-//' \item{id }{a matrix with indexes of the k nearest neighbors. }
+//' \item{id }{a matrix with indices of the k nearest neighbors. }
 //' \item{k }{number neighbors used. }
 //'
 // [[Rcpp::export]]

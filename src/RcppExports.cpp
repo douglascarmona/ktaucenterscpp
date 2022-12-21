@@ -121,15 +121,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // robin_center
-std::size_t robin_center(NumericVector idp, IntegerVector indexes, const double crit_robin);
-RcppExport SEXP _ktaucenterscpp_robin_center(SEXP idpSEXP, SEXP indexesSEXP, SEXP crit_robinSEXP) {
+std::size_t robin_center(NumericVector idp, IntegerVector indices, const double crit_robin);
+RcppExport SEXP _ktaucenterscpp_robin_center(SEXP idpSEXP, SEXP indicesSEXP, SEXP crit_robinSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type idp(idpSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type indexes(indexesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< const double >::type crit_robin(crit_robinSEXP);
-    rcpp_result_gen = Rcpp::wrap(robin_center(idp, indexes, crit_robin));
+    rcpp_result_gen = Rcpp::wrap(robin_center(idp, indices, crit_robin));
     return rcpp_result_gen;
 END_RCPP
 }
