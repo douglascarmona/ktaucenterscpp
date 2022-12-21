@@ -73,38 +73,38 @@ BEGIN_RCPP
 END_RCPP
 }
 // rho_opt
-NumericVector rho_opt(NumericVector t, double c);
-RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP tSEXP, SEXP cSEXP) {
+NumericVector rho_opt(NumericVector x, double c);
+RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP xSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    rcpp_result_gen = Rcpp::wrap(rho_opt(t, c));
+    rcpp_result_gen = Rcpp::wrap(rho_opt(x, c));
     return rcpp_result_gen;
 END_RCPP
 }
 // psi_opt
-NumericVector psi_opt(NumericVector t, double c);
-RcppExport SEXP _ktaucenterscpp_psi_opt(SEXP tSEXP, SEXP cSEXP) {
+NumericVector psi_opt(NumericVector x, double c);
+RcppExport SEXP _ktaucenterscpp_psi_opt(SEXP xSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    rcpp_result_gen = Rcpp::wrap(psi_opt(t, c));
+    rcpp_result_gen = Rcpp::wrap(psi_opt(x, c));
     return rcpp_result_gen;
 END_RCPP
 }
 // derpsi_opt
-NumericVector derpsi_opt(NumericVector t, double c);
-RcppExport SEXP _ktaucenterscpp_derpsi_opt(SEXP tSEXP, SEXP cSEXP) {
+NumericVector derpsi_opt(NumericVector x, double c);
+RcppExport SEXP _ktaucenterscpp_derpsi_opt(SEXP xSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    rcpp_result_gen = Rcpp::wrap(derpsi_opt(t, c));
+    rcpp_result_gen = Rcpp::wrap(derpsi_opt(x, c));
     return rcpp_result_gen;
 END_RCPP
 }

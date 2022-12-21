@@ -2,22 +2,19 @@
 % Please edit documentation in R/RcppExports.R
 \name{psi_opt}
 \alias{psi_opt}
-\title{psi_opt function}
+\title{Implementation of the derivative of quasi optimal rho function}
 \usage{
-psi_opt(t, c)
+psi_opt(x, c)
 }
 \arguments{
-\item{t}{a numeric vector}
+\item{x}{a numeric vector}
 
 \item{c}{a tunning constant.}
 }
 \value{
-psi(\code{t}/ \code{c})
+Numeric vector with with the derivative of the quasi optimal rho computation
+for each element of x.
 }
 \description{
-An implementation of the derivative of quasi optimal rho function
-}
-\examples{
-val <- psi_opt(t = 0.5, c = 1)
-
+Implementation of the derivative of quasi optimal rho function
 }

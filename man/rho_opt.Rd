@@ -2,26 +2,24 @@
 % Please edit documentation in R/RcppExports.R
 \name{rho_opt}
 \alias{rho_opt}
-\title{rho_opt function}
+\title{Quasi optimal rho function following reference [1]}
 \usage{
-rho_opt(t, c)
+rho_opt(x, c)
 }
 \arguments{
-\item{t}{numeric vector.}
+\item{x}{numeric vector.}
 
 \item{c}{tunning constant.}
 }
 \value{
-rho(\code{t}/\code{c})
+Numeric vector with with quasi optimal rho computation for each element of
+x.
 }
 \description{
-An implementation of quasi optimal rho functions following reference [1]
-}
-\examples{
-val <- rho_opt(t = 0.5, c = 1.0)
+Quasi optimal rho function following reference [1]
 }
 \references{
-[1] Salibian-Barrera, M., Willems, G., & Zamar,
-  R. (2008). The fast-tau estimator for regression. Journal of
-  Computational and Graphical Statistics, 17(3), 659-682.
+[1] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
+estimator for regression. Journal of Computational and GraphicalStatistics,
+17(3), 659-682.
 }

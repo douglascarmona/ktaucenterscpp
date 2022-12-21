@@ -69,48 +69,48 @@ ktaucenters_run <- function(x, centers, tolerance, iter_max, method) {
     .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, iter_max, method)
 }
 
-#'rho_opt function
+#' Quasi optimal rho function following reference [1]
 #'
-#' An implementation of quasi optimal rho functions following reference [1]
+#' @param x numeric vector.
+#' @param c tunning constant.
 #'
-#'@param t numeric vector.
-#'@param c tunning constant.
-#'@return rho(\code{t}/\code{c})
-#'@examples val <- rho_opt(t = 0.5, c = 1.0)
-#'@references [1] Salibian-Barrera, M., Willems, G., & Zamar,
-#'   R. (2008). The fast-tau estimator for regression. Journal of
-#'   Computational and Graphical Statistics, 17(3), 659-682.
+#' @return
+#' Numeric vector with with quasi optimal rho computation for each element of
+#' x.
 #'
-#'@export
-rho_opt <- function(t, c) {
-    .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', t, c)
+#'@references
+#' [1] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
+#' estimator for regression. Journal of Computational and GraphicalStatistics,
+#' 17(3), 659-682.
+#'
+rho_opt <- function(x, c) {
+    .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
-#'psi_opt function
+#' Implementation of the derivative of quasi optimal rho function
 #'
-#' An implementation of the derivative of quasi optimal rho function
-#'
-#'@param t a numeric vector
-#'@param c a tunning constant.
-#'@return psi(\code{t}/ \code{c})
-#'@examples val <- psi_opt(t = 0.5, c = 1)
-#'
-#'@export
-psi_opt <- function(t, c) {
-    .Call('_ktaucenterscpp_psi_opt', PACKAGE = 'ktaucenterscpp', t, c)
-}
-
-#' derpsiOpt
-#' the derivative of the psi function
-#'
-#' @param t a numeric vector
+#' @param x a numeric vector
 #' @param c a tunning constant.
-#' @return rho'(\code{x}/ \code{c})
-#' @examples val <- derpsi_opt(t = 0.5, c = 1.0)
 #'
-#' @export
-derpsi_opt <- function(t, c) {
-    .Call('_ktaucenterscpp_derpsi_opt', PACKAGE = 'ktaucenterscpp', t, c)
+#' @return
+#' Numeric vector with with the derivative of the quasi optimal rho computation
+#' for each element of x.
+#'
+psi_opt <- function(x, c) {
+    .Call('_ktaucenterscpp_psi_opt', PACKAGE = 'ktaucenterscpp', x, c)
+}
+
+#' Implementation of the second derivative of the rho function
+#'
+#' @param x a numeric vector
+#' @param c a tunning constant.
+#'
+#' @return
+#' Numeric vector with with the second derivative of the quasi optimal rho
+#' computation for each element of x.
+#'
+derpsi_opt <- function(x, c) {
+    .Call('_ktaucenterscpp_derpsi_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
 #' Estimates the local points density.
