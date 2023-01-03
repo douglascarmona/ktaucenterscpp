@@ -173,21 +173,24 @@ robinden <- function(D, n_clusters, mp) {
     .Call('_ktaucenterscpp_robinden', PACKAGE = 'ktaucenterscpp', D, n_clusters, mp)
 }
 
-#'normal_consistency_constants
+#' Normal Consistency Constants
 #'
-#'@description constants previously computed so the M scale is
-#'consistent with the standard normal distribution for the quasi optimal rho
-#'function considered in \code{\link{rho_opt}}. (Constant were computed from
-#'p = 1 to p = 400)
+#' Constants previously computed so the M scale is consistent with the standard
+#' normal distribution for the quasi optimal rho function considered in
+#' \code{\link{rho_opt}}. (Constants were computed from p = 1 to p = 400)
 #'
-#'@param p dimension where observation lives
-#'@return c tunning constant
-#'@references [1] Maronna, R. A., Martin, R. D., Yohai, V. J., &
-#'Salibián-Barrera, M. (2018). 'Robust statistics: theory and methods (with R).
-#'Wiley.
-#'[2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008).
-#'The fast-tau estimator for regression.
-#'Journal of Computational and Graphical Statistics, 17(3), 659-682.
+#' @param p dimension where observation lives
+#'
+#' @return c tunning constant
+#'
+#' @references
+#' [1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.
+#' (2018). 'Robust statistics: theory and methods (with ' R). Wiley.
+#'
+#' [2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
+#' estimator for regression. 'Journal of Computational and Graphical
+#' Statistics, 17(3), 659-682.
+#'
 normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
@@ -200,19 +203,20 @@ const_c2 <- function(p) {
     .Call('_ktaucenterscpp_const_c2', PACKAGE = 'ktaucenterscpp', p)
 }
 
-#' mscale
-#' the m scale of an univariate sample (see reference below)
+#' M scale
+#'
+#' The M scale of an univariate sample (see reference below)
 #'
 #' @param u an univariate sample of size n.
 #' @param b the desired break down point
-#' @param c a tuning constant, if consistency to standard normal
-#'   distribution is desired use
-#' \code{\link{normal_consistency_constants}}
-#' @return the mscale value
+#' @param c a tuning constant. If consistency to standard normal distribution
+#' is desired use \code{\link{normal_consistency_constants}}
 #'
-#' @export
-mscale <- function(distances, c, b) {
-    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', distances, c, b)
+#' @return
+#' mscale value
+#'
+mscale <- function(u, c, b) {
+    .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, c, b)
 }
 
 #'tau_scale function

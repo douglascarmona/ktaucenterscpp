@@ -2,24 +2,21 @@
 % Please edit documentation in R/RcppExports.R
 \name{mscale}
 \alias{mscale}
-\title{mscale
-the m scale of an univariate sample (see reference below)}
+\title{M scale}
 \usage{
-mscale(distances, c, b)
+mscale(u, c, b)
 }
 \arguments{
-\item{c}{a tuning constant, if consistency to standard normal
-  distribution is desired use
-\code{\link{normal_consistency_constants}}}
+\item{u}{an univariate sample of size n.}
+
+\item{c}{a tuning constant. If consistency to standard normal distribution
+is desired use \code{\link{normal_consistency_constants}}}
 
 \item{b}{the desired break down point}
-
-\item{u}{an univariate sample of size n.}
 }
 \value{
-the mscale value
+mscale value
 }
 \description{
-mscale
-the m scale of an univariate sample (see reference below)
+The M scale of an univariate sample (see reference below)
 }
