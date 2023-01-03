@@ -66,7 +66,7 @@ std::size_t robin_center(NumericVector idp, IntegerVector indices,
 //' @param D a distance matrix, which contains the distances between the rows of
 //' a matrix.
 //' @param n_clusters number of cluster centers to find.
-//' @param mp number of nearest neighbors to find dense regions by LOF
+//' @param mp number of nearest neighbors to compute point density
 //'
 //' @return A list with the following components:
 //' \item{centers }{A numeric vector with the initial cluster centers indices}

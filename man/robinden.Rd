@@ -12,7 +12,7 @@ a matrix.}
 
 \item{n_clusters}{number of cluster centers to find.}
 
-\item{mp}{number of nearest neighbors to find dense regions by LOF}
+\item{mp}{number of nearest neighbors to compute point density}
 }
 \value{
 A list with the following components:
