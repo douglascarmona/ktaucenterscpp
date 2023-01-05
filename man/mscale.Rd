@@ -7,7 +7,7 @@
 mscale(u, c, b)
 }
 \arguments{
-\item{u}{an univariate sample of size n.}
+\item{u}{numeric vector with positive values.}
 
 \item{c}{a tuning constant. If consistency to standard normal distribution
 is desired use \code{\link{normal_consistency_constants}}}

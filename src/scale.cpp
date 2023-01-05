@@ -111,16 +111,16 @@ double const_c2(std::size_t p) { return 2.9987 * pow(p, -0.4647); }
 //'
 //' The M scale of an univariate sample.
 //'
-//' @param u an univariate sample of size n.
-//' @param b the desired break down point.
+//' @param u numeric vector with positive values.
 //' @param c a tuning constant. If consistency to standard normal distribution
 //' is desired use \code{\link{normal_consistency_constants}}
+//' @param b the desired break down point.
 //'
 //' @return
 //' M scale value
 //'
 // [[Rcpp::export]]
-double mscale(NumericVector u, double c, double b) {
+double mscale(NumericVector u, const double c, const double b) {
 
   const double max_error_diff = 1e-10;
 
