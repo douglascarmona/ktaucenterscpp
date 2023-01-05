@@ -173,11 +173,12 @@ double tau_scale(NumericVector u, const double c, const double s) {
 // TODO: Add docs
 //'Wni function
 // [[Rcpp::export]]
-NumericVector wni(NumericVector distances, double c1, double c2, double s) {
+NumericVector wni(NumericVector distances, const double c1, const double c2,
+                  const double s) {
 
   NumericVector dnor = distances / s;
-  double A = sum(2 * rho_opt(dnor, c2) - psi_opt(dnor, c2) * dnor);
-  double B = sum(psi_opt(dnor, c1) * dnor);
+  const double A = sum(2 * rho_opt(dnor, c2) - psi_opt(dnor, c2) * dnor);
+  const double B = sum(psi_opt(dnor, c1) * dnor);
   return ifelse(distances == 0.0,
                 (A / (3.25 * pow(c1, 2))) + (B / (3.25 * pow(c2, 2))),
                 (A * psi_opt(dnor, c1) + B * psi_opt(dnor, c2)) / dnor);

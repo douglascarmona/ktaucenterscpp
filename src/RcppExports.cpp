@@ -195,15 +195,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // wni
-NumericVector wni(NumericVector distances, double c1, double c2, double s);
+NumericVector wni(NumericVector distances, const double c1, const double c2, const double s);
 RcppExport SEXP _ktaucenterscpp_wni(SEXP distancesSEXP, SEXP c1SEXP, SEXP c2SEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
-    Rcpp::traits::input_parameter< double >::type c1(c1SEXP);
-    Rcpp::traits::input_parameter< double >::type c2(c2SEXP);
-    Rcpp::traits::input_parameter< double >::type s(sSEXP);
+    Rcpp::traits::input_parameter< const double >::type c1(c1SEXP);
+    Rcpp::traits::input_parameter< const double >::type c2(c2SEXP);
+    Rcpp::traits::input_parameter< const double >::type s(sSEXP);
     rcpp_result_gen = Rcpp::wrap(wni(distances, c1, c2, s));
     return rcpp_result_gen;
 END_RCPP
