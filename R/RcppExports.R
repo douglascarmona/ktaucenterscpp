@@ -69,13 +69,13 @@ ktaucenters_run <- function(x, centers, tolerance, iter_max, method) {
     .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, iter_max, method)
 }
 
-#' Quasi optimal rho function following reference [1]
+#' Quasi optimal rho function
 #'
-#' @param x numeric vector.
+#' @param x numeric vector with positive values.
 #' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with with quasi optimal rho computation for each element of
+#' Numeric vector with quasi optimal rho computation for each element of
 #' x.
 #'
 #'@references
@@ -87,26 +87,26 @@ rho_opt <- function(x, c) {
     .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
-#' Implementation of the derivative of quasi optimal rho function
+#' Derivative of the quasi optimal rho function
 #'
-#' @param x a numeric vector
-#' @param c a tunning constant.
+#' @param x numeric vector with positive values.
+#' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with with the derivative of the quasi optimal rho computation
+#' Numeric vector with the derivative of the quasi optimal rho computation
 #' for each element of x.
 #'
 psi_opt <- function(x, c) {
     .Call('_ktaucenterscpp_psi_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
-#' Implementation of the second derivative of the rho function
+#' Second derivative of the quasi rho function
 #'
-#' @param x a numeric vector
-#' @param c a tunning constant.
+#' @param x numeric vector with positive values.
+#' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with with the second derivative of the quasi optimal rho
+#' Numeric vector with the second derivative of the quasi optimal rho
 #' computation for each element of x.
 #'
 derpsi_opt <- function(x, c) {
@@ -181,7 +181,7 @@ robinden <- function(D, n_clusters, mp) {
 #'
 #' @param p dimension where observation lives
 #'
-#' @return c tunning constant
+#' @return c tuning constant
 #'
 #' @references
 #' [1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.
@@ -195,10 +195,23 @@ normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
 
+#' Tuning constant 1
 const_c1 <- function() {
     .Call('_ktaucenterscpp_const_c1', PACKAGE = 'ktaucenterscpp')
 }
 
+#' Tuning constant approximation for τ-estimator to reach 90% efficiency
+#'
+#' @param p dimension where observation lives
+#'
+#' @return
+#' Tuning constant for τ-estimator
+#'
+#' @references
+#' Maronna, R. A. and Yohai, V. J. (2017). Robust and efficient estimation of
+#' multivariate scatter and location. Computational Statistics & Data Analysis,
+#' 109:64–75.
+#'
 const_c2 <- function(p) {
     .Call('_ktaucenterscpp_const_c2', PACKAGE = 'ktaucenterscpp', p)
 }

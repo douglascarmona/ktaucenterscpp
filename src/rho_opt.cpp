@@ -2,13 +2,13 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-//' Quasi optimal rho function following reference [1]
+//' Quasi optimal rho function
 //'
-//' @param x numeric vector.
+//' @param x numeric vector with positive values.
 //' @param c tunning constant.
 //'
 //' @return
-//' Numeric vector with with quasi optimal rho computation for each element of
+//' Numeric vector with quasi optimal rho computation for each element of
 //' x.
 //'
 //'@references
@@ -17,85 +17,83 @@ using namespace Rcpp;
 //' 17(3), 659-682.
 //'
 // [[Rcpp::export]]
-NumericVector rho_opt(NumericVector x, double c) {
+NumericVector rho_opt(NumericVector x, const double c) {
   NumericVector out(no_init(x.size()));
 
-  std::size_t idx = 0;
+  NumericVector::iterator out_it = out.begin();
   for (const auto &x_it : x) {
     if (fabs(x_it) <= 2 * c) {
-      out[idx] = 0.5 * pow(x_it, 2) / (3.25 * pow(c, 2));
+      *out_it = 0.5 * pow(x_it / c, 2) / 3.25;
     } else if (fabs(x_it) <= 3 * c) {
-      out[idx] =
-          (1.792 - 0.972 * pow(x_it, 2) / pow(c, 2) +
-           0.432 * pow(x_it, 4) / pow(c, 4) - 0.052 * pow(x_it, 6) / pow(c, 6) +
-           0.002 * pow(x_it, 8) / pow(c, 8)) /
-          3.25;
+      *out_it = (1.792 - 0.972 * pow(x_it / c, 2) + 0.432 * pow(x_it / c, 4) -
+                 0.052 * pow(x_it / c, 6) + 0.002 * pow(x_it / c, 8)) /
+                3.25;
     } else {
-      out[idx] = 1.0;
+      *out_it = 1.0;
     }
-    ++idx;
+    ++out_it;
   }
 
   return out;
 }
 
-//' Implementation of the derivative of quasi optimal rho function
+//' Derivative of the quasi optimal rho function
 //'
-//' @param x a numeric vector
-//' @param c a tunning constant.
+//' @param x numeric vector with positive values.
+//' @param c tunning constant.
 //'
 //' @return
-//' Numeric vector with with the derivative of the quasi optimal rho computation
+//' Numeric vector with the derivative of the quasi optimal rho computation
 //' for each element of x.
 //'
 // [[Rcpp::export]]
-NumericVector psi_opt(NumericVector x, double c) {
+NumericVector psi_opt(NumericVector x, const double c) {
   NumericVector out(no_init(x.size()));
 
-  std::size_t idx = 0;
+  NumericVector::iterator out_it = out.begin();
   for (const auto &x_it : x) {
     if (fabs(x_it) <= 2 * c) {
-      out[idx] = x_it / (3.25 * pow(c, 2));
+      *out_it = x_it / (3.25 * pow(c, 2));
     } else if (fabs(x_it) <= 3 * c) {
-      out[idx] = (-1.944 * x_it / pow(c, 2) + 1.728 * pow(x_it, 3) / pow(c, 4) -
-                  0.312 * pow(x_it, 5) / pow(c, 6) +
-                  0.016 * pow(x_it, 7) / pow(c, 8)) /
-                 3.25;
+      *out_it = (-1.944 * x_it / pow(c, 2) + 1.728 * pow(x_it, 3) / pow(c, 4) -
+                 0.312 * pow(x_it, 5) / pow(c, 6) +
+                 0.016 * pow(x_it, 7) / pow(c, 8)) /
+                3.25;
     } else {
-      out[idx] = 0.0;
+      *out_it = 0.0;
     }
-    ++idx;
+    ++out_it;
   }
 
   return out;
 }
 
-//' Implementation of the second derivative of the rho function
+//' Second derivative of the quasi rho function
 //'
-//' @param x a numeric vector
-//' @param c a tunning constant.
+//' @param x numeric vector with positive values.
+//' @param c tunning constant.
 //'
 //' @return
-//' Numeric vector with with the second derivative of the quasi optimal rho
+//' Numeric vector with the second derivative of the quasi optimal rho
 //' computation for each element of x.
 //'
 // [[Rcpp::export]]
 NumericVector derpsi_opt(NumericVector x, double c) {
   NumericVector out(no_init(x.size()));
 
-  std::size_t idx = 0;
+  NumericVector::iterator out_it = out.begin();
   for (const auto &x_it : x) {
     if (fabs(x_it) <= 2 * c) {
-      out[idx] = 1.0 / (3.25 * pow(c, 2));
+      *out_it = 1.0 / (3.25 * pow(c, 2));
     } else if (fabs(x_it) <= 3 * c) {
-      out[idx] =
+      *out_it =
           (-1.944 / pow(c, 2) + 5.184 * pow(x_it, 2) / pow(c, 4) -
            1.56 * pow(x_it, 4) / pow(c, 6) + 0.112 * pow(x_it, 6) / pow(c, 8)) /
           3.25;
     } else {
-      out[idx] = 0.0;
+      *out_it = 0.0;
     }
-    ++idx;
+    ++out_it;
   }
 
   return out;

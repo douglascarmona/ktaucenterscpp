@@ -2,21 +2,21 @@
 % Please edit documentation in R/RcppExports.R
 \name{rho_opt}
 \alias{rho_opt}
-\title{Quasi optimal rho function following reference [1]}
+\title{Quasi optimal rho function}
 \usage{
 rho_opt(x, c)
 }
 \arguments{
-\item{x}{numeric vector.}
+\item{x}{numeric vector with positive values.}
 
 \item{c}{tunning constant.}
 }
 \value{
-Numeric vector with with quasi optimal rho computation for each element of
+Numeric vector with quasi optimal rho computation for each element of
 x.
 }
 \description{
-Quasi optimal rho function following reference [1]
+Quasi optimal rho function
 }
 \references{
 [1] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau

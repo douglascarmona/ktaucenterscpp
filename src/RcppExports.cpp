@@ -73,25 +73,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // rho_opt
-NumericVector rho_opt(NumericVector x, double c);
+NumericVector rho_opt(NumericVector x, const double c);
 RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP xSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< const double >::type c(cSEXP);
     rcpp_result_gen = Rcpp::wrap(rho_opt(x, c));
     return rcpp_result_gen;
 END_RCPP
 }
 // psi_opt
-NumericVector psi_opt(NumericVector x, double c);
+NumericVector psi_opt(NumericVector x, const double c);
 RcppExport SEXP _ktaucenterscpp_psi_opt(SEXP xSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< const double >::type c(cSEXP);
     rcpp_result_gen = Rcpp::wrap(psi_opt(x, c));
     return rcpp_result_gen;
 END_RCPP

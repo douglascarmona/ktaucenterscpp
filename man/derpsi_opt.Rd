@@ -2,19 +2,19 @@
 % Please edit documentation in R/RcppExports.R
 \name{derpsi_opt}
 \alias{derpsi_opt}
-\title{Implementation of the second derivative of the rho function}
+\title{Second derivative of the quasi rho function}
 \usage{
 derpsi_opt(x, c)
 }
 \arguments{
-\item{x}{a numeric vector}
+\item{x}{numeric vector with positive values.}
 
-\item{c}{a tunning constant.}
+\item{c}{tunning constant.}
 }
 \value{
-Numeric vector with with the second derivative of the quasi optimal rho
+Numeric vector with the second derivative of the quasi optimal rho
 computation for each element of x.
 }
 \description{
-Implementation of the second derivative of the rho function
+Second derivative of the quasi rho function
 }
