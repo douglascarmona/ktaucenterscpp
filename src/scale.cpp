@@ -25,7 +25,7 @@ using namespace Rcpp;
 //' Statistics, 17(3), 659-682.
 //'
 // [[Rcpp::export]]
-double normal_consistency_constants(int p) {
+double normal_consistency_constants(const std::size_t p) {
   // TODO: Replace hard coded values with function
   NumericVector vaux{
       0.404629, 0.6944748, 0.8985921, 1.063144, 1.204321, 1.329791, 1.443817,
@@ -105,7 +105,7 @@ double normal_consistency_constants(int p) {
 //' 109:64–75.
 //'
 // [[Rcpp::export]]
-double const_c2(std::size_t p) { return 2.9987 * pow(p, -0.4647); }
+double const_c2(const std::size_t p) { return 2.9987 * pow(p, -0.4647); }
 
 //' M scale
 //'
