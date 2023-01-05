@@ -246,7 +246,17 @@ tau_scale <- function(u, c, s) {
     .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', u, c, s)
 }
 
-#'Wni function
+#' Weight function
+#'
+#' @param distances numeric vector with distances from each point to its
+#' cluster center.
+#' @param c1 tuning constant used for m scale estimation.
+#' @param c2 tuning constant used for \eqn{\tau} scale estimation.
+#' @param s M scale for the same vector of distances.
+#'
+#' @return
+#' Numeric vector with the weight for each observation
+#'
 wni <- function(distances, c1, c2, s) {
     .Call('_ktaucenterscpp_wni', PACKAGE = 'ktaucenterscpp', distances, c1, c2, s)
 }

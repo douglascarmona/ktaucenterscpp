@@ -170,8 +170,17 @@ double tau_scale(NumericVector u, const double c, const double s) {
   return s * sqrt(mean(rho_opt(u / s, c)));
 }
 
-// TODO: Add docs
-//'Wni function
+//' Weight function
+//'
+//' @param distances numeric vector with distances from each point to its
+//' cluster center.
+//' @param c1 tuning constant used for m scale estimation.
+//' @param c2 tuning constant used for \eqn{\tau} scale estimation.
+//' @param s M scale for the same vector of distances.
+//'
+//' @return
+//' Numeric vector with the weight for each observation
+//'
 // [[Rcpp::export]]
 NumericVector wni(NumericVector distances, const double c1, const double c2,
                   const double s) {
@@ -179,7 +188,7 @@ NumericVector wni(NumericVector distances, const double c1, const double c2,
   NumericVector dnor = distances / s;
   const double A = sum(2 * rho_opt(dnor, c2) - psi_opt(dnor, c2) * dnor);
   const double B = sum(psi_opt(dnor, c1) * dnor);
-  return ifelse(distances == 0.0,
+  return ifelse(dnor == 0.0,
                 (A / (3.25 * pow(c1, 2))) + (B / (3.25 * pow(c2, 2))),
                 (A * psi_opt(dnor, c1) + B * psi_opt(dnor, c2)) / dnor);
 }
