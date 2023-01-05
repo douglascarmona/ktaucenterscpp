@@ -154,11 +154,20 @@ double mscale(NumericVector u, double c, double b) {
   return sn;
 }
 
-// TODO: Add docs
-//'tau_scale function
+//' \eqn{\tau} scale
+//'
+//' The \eqn{\tau} scale of an univariate sample.
+//'
+//' @param u numeric vector with positive values.
+//' @param s M scale for the same univariate sample (u).
+//' @param c tuning constant to regulate estimator's efficiency.
+//'
+//' @return
+//' \eqn{\tau} scale value
+//'
 // [[Rcpp::export]]
-double tau_scale(NumericVector distances, double c, double s) {
-  return s * sqrt(mean(rho_opt(distances / s, c)));
+double tau_scale(NumericVector u, const double c, const double s) {
+  return s * sqrt(mean(rho_opt(u / s, c)));
 }
 
 // TODO: Add docs

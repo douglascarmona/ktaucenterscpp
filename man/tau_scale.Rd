@@ -2,10 +2,20 @@
 % Please edit documentation in R/RcppExports.R
 \name{tau_scale}
 \alias{tau_scale}
-\title{tau_scale function}
+\title{\eqn{\tau} scale}
 \usage{
-tau_scale(distances, c, s)
+tau_scale(u, c, s)
+}
+\arguments{
+\item{u}{numeric vector with positive values.}
+
+\item{c}{tuning constant to regulate estimator's efficiency.}
+
+\item{s}{M scale for the same univariate sample (u).}
+}
+\value{
+\eqn{\tau} scale value
 }
 \description{
-tau_scale function
+The \eqn{\tau} scale of an univariate sample.
 }

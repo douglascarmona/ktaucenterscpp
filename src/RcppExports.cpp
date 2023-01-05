@@ -182,15 +182,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // tau_scale
-double tau_scale(NumericVector distances, double c, double s);
-RcppExport SEXP _ktaucenterscpp_tau_scale(SEXP distancesSEXP, SEXP cSEXP, SEXP sSEXP) {
+double tau_scale(NumericVector u, const double c, const double s);
+RcppExport SEXP _ktaucenterscpp_tau_scale(SEXP uSEXP, SEXP cSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(tau_scale(distances, c, s));
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    Rcpp::traits::input_parameter< const double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< const double >::type s(sSEXP);
+    rcpp_result_gen = Rcpp::wrap(tau_scale(u, c, s));
     return rcpp_result_gen;
 END_RCPP
 }

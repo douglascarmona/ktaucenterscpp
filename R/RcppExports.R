@@ -231,9 +231,19 @@ mscale <- function(u, c, b) {
     .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, c, b)
 }
 
-#'tau_scale function
-tau_scale <- function(distances, c, s) {
-    .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', distances, c, s)
+#' \eqn{\tau} scale
+#'
+#' The \eqn{\tau} scale of an univariate sample.
+#'
+#' @param u numeric vector with positive values.
+#' @param s M scale for the same univariate sample (u).
+#' @param c tuning constant to regulate estimator's efficiency.
+#'
+#' @return
+#' \eqn{\tau} scale value
+#'
+tau_scale <- function(u, c, s) {
+    .Call('_ktaucenterscpp_tau_scale', PACKAGE = 'ktaucenterscpp', u, c, s)
 }
 
 #'Wni function
