@@ -157,16 +157,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// const_c1
-double const_c1();
-RcppExport SEXP _ktaucenterscpp_const_c1() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(const_c1());
-    return rcpp_result_gen;
-END_RCPP
-}
 // const_c2
 double const_c2(std::size_t p);
 RcppExport SEXP _ktaucenterscpp_const_c2(SEXP pSEXP) {
@@ -294,7 +284,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_robin_center", (DL_FUNC) &_ktaucenterscpp_robin_center, 3},
     {"_ktaucenterscpp_robinden", (DL_FUNC) &_ktaucenterscpp_robinden, 3},
     {"_ktaucenterscpp_normal_consistency_constants", (DL_FUNC) &_ktaucenterscpp_normal_consistency_constants, 1},
-    {"_ktaucenterscpp_const_c1", (DL_FUNC) &_ktaucenterscpp_const_c1, 0},
     {"_ktaucenterscpp_const_c2", (DL_FUNC) &_ktaucenterscpp_const_c2, 1},
     {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
     {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 3},

@@ -12,11 +12,11 @@ mscale(u, c, b)
 \item{c}{a tuning constant. If consistency to standard normal distribution
 is desired use \code{\link{normal_consistency_constants}}}
 
-\item{b}{the desired break down point}
+\item{b}{the desired break down point.}
 }
 \value{
-mscale value
+M scale value
 }
 \description{
-The M scale of an univariate sample (see reference below)
+The M scale of an univariate sample.
 }

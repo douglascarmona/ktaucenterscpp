@@ -175,13 +175,14 @@ robinden <- function(D, n_clusters, mp) {
 
 #' Normal Consistency Constants
 #'
-#' Constants previously computed so the M scale is consistent with the standard
-#' normal distribution for the quasi optimal rho function considered in
-#' \code{\link{rho_opt}}. (Constants were computed from p = 1 to p = 400)
+#' M scale tuning constants so it is consistent with the standard
+#' normal distribution for the quasi optimal \eqn{\rho} function used in
+#' \code{\link{rho_opt}}. These constants were computed for 1 \eqn{\leq} p
+#' \eqn{\leq} 400.
 #'
-#' @param p dimension where observation lives
+#' @param p dimension where observation lives.
 #'
-#' @return c tuning constant
+#' @return tuning constant.
 #'
 #' @references
 #' [1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.
@@ -195,17 +196,15 @@ normal_consistency_constants <- function(p) {
     .Call('_ktaucenterscpp_normal_consistency_constants', PACKAGE = 'ktaucenterscpp', p)
 }
 
-#' Tuning constant 1
-const_c1 <- function() {
-    .Call('_ktaucenterscpp_const_c1', PACKAGE = 'ktaucenterscpp')
-}
-
-#' Tuning constant approximation for τ-estimator to reach 90% efficiency
+#' Tuning constant for \eqn{\tau}-estimator
 #'
-#' @param p dimension where observation lives
+#' Tuning constant approximation for \eqn{\tau}-estimator to reach 90%
+#' efficiency
+#'
+#' @param p dimension where observation lives.
 #'
 #' @return
-#' Tuning constant for τ-estimator
+#' Tuning constant for \eqn{\tau}-estimator.
 #'
 #' @references
 #' Maronna, R. A. and Yohai, V. J. (2017). Robust and efficient estimation of
@@ -218,15 +217,15 @@ const_c2 <- function(p) {
 
 #' M scale
 #'
-#' The M scale of an univariate sample (see reference below)
+#' The M scale of an univariate sample.
 #'
 #' @param u an univariate sample of size n.
-#' @param b the desired break down point
+#' @param b the desired break down point.
 #' @param c a tuning constant. If consistency to standard normal distribution
 #' is desired use \code{\link{normal_consistency_constants}}
 #'
 #' @return
-#' mscale value
+#' M scale value
 #'
 mscale <- function(u, c, b) {
     .Call('_ktaucenterscpp_mscale', PACKAGE = 'ktaucenterscpp', u, c, b)

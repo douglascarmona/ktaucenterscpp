@@ -7,15 +7,16 @@
 normal_consistency_constants(p)
 }
 \arguments{
-\item{p}{dimension where observation lives}
+\item{p}{dimension where observation lives.}
 }
 \value{
-c tunning constant
+tuning constant.
 }
 \description{
-Constants previously computed so the M scale is consistent with the standard
-normal distribution for the quasi optimal rho function considered in
-\code{\link{rho_opt}}. (Constants were computed from p = 1 to p = 400)
+M scale tuning constants so it is consistent with the standard
+normal distribution for the quasi optimal \eqn{\rho} function used in
+\code{\link{rho_opt}}. These constants were computed for 1 \eqn{\leq} p
+\eqn{\leq} 400.
 }
 \references{
 [1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.

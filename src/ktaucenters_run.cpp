@@ -16,7 +16,7 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
   const std::size_t n_clusters = centers.rows();
   const std::size_t n = x.rows();
   const std::size_t p = x.cols();
-  const double c1 = const_c1();
+  const double c1 = 1.0;
   const double c2 = const_c2(p);
   // TODO: Replace and use b1 and b2 as function parameters
   const double b1 = 0.5;

@@ -5,7 +5,6 @@
 using namespace Rcpp;
 
 double normal_consistency_constants(int);
-double const_c1();
 double const_c2(std::size_t);
 double median_cpp(NumericVector);
 double mscale(NumericVector, double, double);

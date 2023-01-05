@@ -7,13 +7,14 @@ using namespace Rcpp;
 
 //' Normal Consistency Constants
 //'
-//' Constants previously computed so the M scale is consistent with the standard
-//' normal distribution for the quasi optimal rho function considered in
-//' \code{\link{rho_opt}}. (Constants were computed from p = 1 to p = 400)
+//' M scale tuning constants so it is consistent with the standard
+//' normal distribution for the quasi optimal \eqn{\rho} function used in
+//' \code{\link{rho_opt}}. These constants were computed for 1 \eqn{\leq} p
+//' \eqn{\leq} 400.
 //'
-//' @param p dimension where observation lives
+//' @param p dimension where observation lives.
 //'
-//' @return c tunning constant
+//' @return tuning constant.
 //'
 //' @references
 //' [1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.
@@ -88,30 +89,35 @@ double normal_consistency_constants(int p) {
   return vaux(p - 1);
 }
 
-// TODO: Add comment about what c1 represents
-// distance function
+//' Tuning constant for \eqn{\tau}-estimator
+//'
+//' Tuning constant approximation for \eqn{\tau}-estimator to reach 90%
+//' efficiency
+//'
+//' @param p dimension where observation lives.
+//'
+//' @return
+//' Tuning constant for \eqn{\tau}-estimator.
+//'
+//' @references
+//' Maronna, R. A. and Yohai, V. J. (2017). Robust and efficient estimation of
+//' multivariate scatter and location. Computational Statistics & Data Analysis,
+//' 109:64–75.
+//'
 // [[Rcpp::export]]
-double const_c1() { return 1.0; }
-
-// TODO: Add comment about what c2 represents
-// distance function
-// [[Rcpp::export]]
-double const_c2(std::size_t p) {
-  // TODO: add comment about Maronna reference
-  return 2.9987 * pow(p, -0.4647);
-}
+double const_c2(std::size_t p) { return 2.9987 * pow(p, -0.4647); }
 
 //' M scale
 //'
-//' The M scale of an univariate sample (see reference below)
+//' The M scale of an univariate sample.
 //'
 //' @param u an univariate sample of size n.
-//' @param b the desired break down point
+//' @param b the desired break down point.
 //' @param c a tuning constant. If consistency to standard normal distribution
 //' is desired use \code{\link{normal_consistency_constants}}
 //'
 //' @return
-//' mscale value
+//' M scale value
 //'
 // [[Rcpp::export]]
 double mscale(NumericVector u, double c, double b) {
