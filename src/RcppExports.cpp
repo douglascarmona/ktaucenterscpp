@@ -208,15 +208,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_weights
-NumericVector get_weights(NumericVector x, IntegerVector clusters);
-RcppExport SEXP _ktaucenterscpp_get_weights(SEXP xSEXP, SEXP clustersSEXP) {
+// weight_factor
+NumericVector weight_factor(NumericVector wni, IntegerVector clusters);
+RcppExport SEXP _ktaucenterscpp_weight_factor(SEXP wniSEXP, SEXP clustersSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type wni(wniSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type clusters(clustersSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_weights(x, clusters));
+    rcpp_result_gen = Rcpp::wrap(weight_factor(wni, clusters));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -288,7 +288,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_mscale", (DL_FUNC) &_ktaucenterscpp_mscale, 3},
     {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 3},
     {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 4},
-    {"_ktaucenterscpp_get_weights", (DL_FUNC) &_ktaucenterscpp_get_weights, 2},
+    {"_ktaucenterscpp_weight_factor", (DL_FUNC) &_ktaucenterscpp_weight_factor, 2},
     {"_ktaucenterscpp_get_new_centers", (DL_FUNC) &_ktaucenterscpp_get_new_centers, 4},
     {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
     {"_ktaucenterscpp_top_index", (DL_FUNC) &_ktaucenterscpp_top_index, 3},

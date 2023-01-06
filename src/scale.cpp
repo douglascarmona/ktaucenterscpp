@@ -193,30 +193,39 @@ NumericVector wni(NumericVector distances, const double c1, const double c2,
                 (A * psi_opt(dnor, c1) + B * psi_opt(dnor, c2)) / dnor);
 }
 
-// TODO: Add docs
-// total_wni_by_cluster function
+//' Weight factor
+//'
+//' @param wni numeric vector with the weight for each observation.
+//' @param clusters integer vector with the cluster location for each
+//' observation.
+//'
+//' @return
+//' Numeric vector with the weight factor for each observation
+//'
 // [[Rcpp::export]]
-NumericVector get_weights(NumericVector x, IntegerVector clusters) {
+NumericVector weight_factor(NumericVector wni, IntegerVector clusters) {
 
-  if (x.size() != clusters.size()) {
-    stop("Both x and clusters must have same size.");
+  if (wni.size() != clusters.size()) {
+    stop("Both wni and clusters must have same size.");
   }
 
+  const std::size_t n_records = wni.size();
   const std::size_t n_cluster = unique(clusters).size();
-  NumericVector out(no_init(x.size()));
-  NumericVector wni_sum(n_cluster);
-  IntegerVector clusters_count(n_cluster);
 
-  for (std::size_t idx = 0; idx != x.size(); ++idx) {
-    wni_sum[clusters[idx] - 1] += x[idx];
-    clusters_count[clusters[idx] - 1] += 1;
+  NumericVector out(no_init(n_records));
+  NumericVector wni_sum(n_cluster);
+  IntegerVector cluster_count(n_cluster);
+
+  for (std::size_t idx = 0; idx < n_records; ++idx) {
+    wni_sum[clusters[idx] - 1] += wni[idx];
+    cluster_count[clusters[idx] - 1] += 1;
   }
 
-  for (std::size_t idx = 0; idx != x.size(); ++idx) {
+  for (std::size_t idx = 0; idx < n_records; ++idx) {
     if (wni_sum[clusters[idx] - 1] != 0.0) {
-      out[idx] = x[idx] / wni_sum[clusters[idx] - 1];
+      out[idx] = wni[idx] / wni_sum[clusters[idx] - 1];
     } else {
-      out[idx] = 1.0 / clusters_count[clusters[idx] - 1];
+      out[idx] = 1.0 / cluster_count[clusters[idx] - 1];
     }
   }
 

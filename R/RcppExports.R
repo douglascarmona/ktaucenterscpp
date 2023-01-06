@@ -261,8 +261,17 @@ wni <- function(distances, c1, c2, s) {
     .Call('_ktaucenterscpp_wni', PACKAGE = 'ktaucenterscpp', distances, c1, c2, s)
 }
 
-get_weights <- function(x, clusters) {
-    .Call('_ktaucenterscpp_get_weights', PACKAGE = 'ktaucenterscpp', x, clusters)
+#' Weight factor
+#'
+#' @param wni numeric vector with the weight for each observation.
+#' @param clusters integer vector with the cluster location for each
+#' observation.
+#'
+#' @return
+#' Numeric vector with the weight factor for each observation
+#'
+weight_factor <- function(wni, clusters) {
+    .Call('_ktaucenterscpp_weight_factor', PACKAGE = 'ktaucenterscpp', wni, clusters)
 }
 
 get_new_centers <- function(x, weights, clusters, distances_min) {
