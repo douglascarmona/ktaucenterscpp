@@ -71,6 +71,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// flag_outliers
+List flag_outliers(const double cutoff, const double b, List ktau);
+RcppExport SEXP _ktaucenterscpp_flag_outliers(SEXP cutoffSEXP, SEXP bSEXP, SEXP ktauSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const double >::type cutoff(cutoffSEXP);
+    Rcpp::traits::input_parameter< const double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< List >::type ktau(ktauSEXP);
+    rcpp_result_gen = Rcpp::wrap(flag_outliers(cutoff, b, ktau));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rho_opt
 NumericVector rho_opt(NumericVector x, const double c);
 RcppExport SEXP _ktaucenterscpp_rho_opt(SEXP xSEXP, SEXP cSEXP) {
@@ -276,6 +289,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_distance", (DL_FUNC) &_ktaucenterscpp_distance, 1},
     {"_ktaucenterscpp_dist_to_kNN", (DL_FUNC) &_ktaucenterscpp_dist_to_kNN, 2},
     {"_ktaucenterscpp_ktaucenters_run", (DL_FUNC) &_ktaucenterscpp_ktaucenters_run, 4},
+    {"_ktaucenterscpp_flag_outliers", (DL_FUNC) &_ktaucenterscpp_flag_outliers, 3},
     {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
     {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
     {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},

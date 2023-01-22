@@ -70,9 +70,7 @@ ktaucenters <- function(x,
                         iter_max = 100L,
                         tolerance = 1e-6,
                         n_runs = 1L,
-                        init_centers = list(quote(init_kmeans), quote(init_robin)),
-                        flag_outliers = outliers_tau_cutoff(0.999,
-                                                            0.5)) {
+                        init_centers = list(quote(init_kmeans), quote(init_robin))) {
     # Parameters check                                                    
     x <- as.matrix(x)
     n_clusters <- ifelse(is.list(centers), length(centers), centers)
@@ -97,7 +95,7 @@ ktaucenters <- function(x,
     }
     
     # Outlier detection
-    best_run = flag_outliers(best_run)
+    best_run = flag_outliers(0.999, 0.5, best_run)
     
     return(best_run)
 }

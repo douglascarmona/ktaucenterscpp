@@ -10,8 +10,7 @@ ktaucenters(
   iter_max = 100L,
   tolerance = 1e-06,
   n_runs = 1L,
-  init_centers = list(quote(init_kmeans), quote(init_robin)),
-  flag_outliers = outliers_tau_cutoff(0.999, 0.5)
+  init_centers = list(quote(init_kmeans), quote(init_robin))
 )
 }
 \arguments{
@@ -23,11 +22,11 @@ ktaucenters(
 
 \item{n_runs}{the number of trials that the base algorithm must run. If it is greater than 1 and center is not set as NULL, a random set of (distinct) rows in \code{x} will be chosen as the initial centers.}
 
+\item{max_iter}{a maximum number of iterations used for the algorithm stopping rule}
+
 \item{flag_outliers}{optional argument for outliers detection - quantiles
 of chi-square to be used as a threshold for outliers detection,
 defaults to 0.999}
-
-\item{max_iter}{a maximum number of iterations used for the algorithm stopping rule}
 }
 \value{
 A list including the estimated K centers and labels for the observations

@@ -96,6 +96,20 @@ ktaucenters_run <- function(x, centers, tolerance, iter_max) {
     .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, iter_max)
 }
 
+#' Flag outliers
+#'
+#' @param cutoff quantile of chi-square to be used as a threshold for outliers
+#' detection.
+#' @param b break down point.
+#' @param ktau ktaucenters results.
+#'
+#' @return
+#' Numeric vector with the weight factor for each observation
+#'
+flag_outliers <- function(cutoff, b, ktau) {
+    .Call('_ktaucenterscpp_flag_outliers', PACKAGE = 'ktaucenterscpp', cutoff, b, ktau)
+}
+
 #' Quasi optimal rho function
 #'
 #' @param x numeric vector with positive values.
