@@ -4,21 +4,46 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// TODO: Add docs
-// ktaucenters_run function
+//' Robust Clustering algorithm based on centers, a robust and efficient version
+//' of kmeans.
 //'
-//'@export
+//' @param x numeric matrix of size n x p with all observations.
+//' @param centers numeric matrix with initial cluster centers.
+//' @param tolerance maximum difference between current and new computed
+//' clusters. Parameter used for the algorithm stopping rule.
+//' @param iter_max a maximum number of iterations used for the algorithm
+//' stopping rule.
+//'
+//' @return A list with the following components:
+//' \item{tau }{\eqn{\tau} scale value. }
+//' \item{iter }{number of iterations until convergence is achieved or maximum
+//' number of iteration is reached. }
+//' \item{di }{distance of each observation to its nearest cluster center. }
+//' \item{centers }{numeric matrix of size K x p, with the estimated K centers.
+//'  }
+//' \item{clusters }{integer vector of size n with the cluster location for each
+//' observation. }
+//' \item{p }{dimension where all observations live. }
+//'
+//'@references
+//' [1] Gonzalez, J. D., Yohai, V. J., & Zamar, R. H. (2019).
+//' Robust Clustering Using Tau-Scales. arXiv preprint arXiv:1906.08198.
+//'
+//' [2] Maronna, R. A. and Yohai, V. J. (2017). Robust and efficient estimation
+//' of multivariate scatter and location.Computational Statistics &Data
+//' Analysis, 109 : 64–75.
+//'
 // [[Rcpp::export]]
 List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
-                     const double tolerance, const unsigned int iter_max,
-                     const std::string method) {
+                     const double tolerance, const std::size_t iter_max) {
 
   const std::size_t n_clusters = centers.rows();
   const std::size_t n = x.rows();
   const std::size_t p = x.cols();
+  // According to Maronna and Yohai's reference
   const double c1 = 1.0;
   const double c2 = const_c2(p);
-  // TODO: Replace and use b1 and b2 as function parameters
+  // Target breakdown point
   const double b1 = 0.5;
   const double b2 = 1.0;
 
@@ -49,5 +74,5 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
 
   return (List::create(_["tau"] = tau, _["iter"] = iter, _["di"] = distance_min,
                        _["centers"] = centers, _["clusters"] = clusters,
-                       _["p"] = p, _["weights"] = weights));
+                       _["p"] = p));
 }

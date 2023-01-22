@@ -9,7 +9,6 @@ ktaucenters(
   centers,
   iter_max = 100L,
   tolerance = 1e-06,
-  method = c("optimal-weight", "rocke"),
   n_runs = 1L,
   init_centers = list(quote(init_kmeans), quote(init_robin)),
   flag_outliers = outliers_tau_cutoff(0.999, 0.5)

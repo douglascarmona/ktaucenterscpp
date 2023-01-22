@@ -69,7 +69,6 @@ ktaucenters <- function(x,
                         centers,
                         iter_max = 100L,
                         tolerance = 1e-6,
-                        method = c("optimal-weight", "rocke"),
                         n_runs = 1L,
                         init_centers = list(quote(init_kmeans), quote(init_robin)),
                         flag_outliers = outliers_tau_cutoff(0.999,
@@ -77,7 +76,6 @@ ktaucenters <- function(x,
     # Parameters check                                                    
     x <- as.matrix(x)
     n_clusters <- ifelse(is.list(centers), length(centers), centers)
-    method <- match.arg(method)
     
     # Set up center initialization
     add_init_custom = NULL
@@ -91,7 +89,7 @@ ktaucenters <- function(x,
     for (iter in seq_along(init_centers)) {
         current_run = ktaucenters_run(x, 
                                       eval(init_centers[[iter]])(x, n_clusters),
-                                      tolerance, iter_max, "optimal-weight")
+                                      tolerance, iter_max)
         if (current_run$tau < best_tau) {
             best_run = current_run
             best_tau = best_run$tau

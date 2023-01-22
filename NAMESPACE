@@ -2,7 +2,6 @@
 
 export(density_points)
 export(ktaucenters)
-export(ktaucenters_run)
 export(robinden)
 importFrom(Rcpp,sourceCpp)
 importFrom(dbscan,kNN)

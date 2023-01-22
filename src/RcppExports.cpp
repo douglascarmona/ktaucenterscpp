@@ -58,17 +58,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // ktaucenters_run
-List ktaucenters_run(NumericMatrix x, NumericMatrix centers, const double tolerance, const unsigned int iter_max, const std::string method);
-RcppExport SEXP _ktaucenterscpp_ktaucenters_run(SEXP xSEXP, SEXP centersSEXP, SEXP toleranceSEXP, SEXP iter_maxSEXP, SEXP methodSEXP) {
+List ktaucenters_run(NumericMatrix x, NumericMatrix centers, const double tolerance, const std::size_t iter_max);
+RcppExport SEXP _ktaucenterscpp_ktaucenters_run(SEXP xSEXP, SEXP centersSEXP, SEXP toleranceSEXP, SEXP iter_maxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type centers(centersSEXP);
     Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
-    Rcpp::traits::input_parameter< const unsigned int >::type iter_max(iter_maxSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type method(methodSEXP);
-    rcpp_result_gen = Rcpp::wrap(ktaucenters_run(x, centers, tolerance, iter_max, method));
+    Rcpp::traits::input_parameter< const std::size_t >::type iter_max(iter_maxSEXP);
+    rcpp_result_gen = Rcpp::wrap(ktaucenters_run(x, centers, tolerance, iter_max));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -276,7 +275,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_cluster_counter", (DL_FUNC) &_ktaucenterscpp_cluster_counter, 2},
     {"_ktaucenterscpp_distance", (DL_FUNC) &_ktaucenterscpp_distance, 1},
     {"_ktaucenterscpp_dist_to_kNN", (DL_FUNC) &_ktaucenterscpp_dist_to_kNN, 2},
-    {"_ktaucenterscpp_ktaucenters_run", (DL_FUNC) &_ktaucenterscpp_ktaucenters_run, 5},
+    {"_ktaucenterscpp_ktaucenters_run", (DL_FUNC) &_ktaucenterscpp_ktaucenters_run, 4},
     {"_ktaucenterscpp_rho_opt", (DL_FUNC) &_ktaucenterscpp_rho_opt, 2},
     {"_ktaucenterscpp_psi_opt", (DL_FUNC) &_ktaucenterscpp_psi_opt, 2},
     {"_ktaucenterscpp_derpsi_opt", (DL_FUNC) &_ktaucenterscpp_derpsi_opt, 2},
