@@ -63,7 +63,7 @@
 #' @references Gonzalez, J. D., Yohai, V. J., & Zamar, R. H. (2019).
 #' Robust Clustering Using Tau-Scales. arXiv preprint arXiv:1906.08198.
 #'
-#' @importFrom stats kmeans dist qchisq
+#' @importFrom stats kmeans
 #' @export
 ktaucenters <- function(x,
                         centers,

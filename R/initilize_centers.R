@@ -1,5 +1,4 @@
 KMEANS_K_DEFAULT <- 20
-ROBIN_DEFAULT_METHOD <- "density"
 
 init_kmeans <- function(data, K) {
   ret <- kmeans(data, K, nstart = KMEANS_K_DEFAULT)$centers
