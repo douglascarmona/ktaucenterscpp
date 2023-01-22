@@ -232,12 +232,22 @@ NumericVector weight_factor(NumericVector wni, IntegerVector clusters) {
   return out;
 }
 
-// TODO: Add docs
-// get_new_centers function
+//' Computes new cluster centers
+//'
+//' @param x numeric matrix of size n x p with all observations.
+//' @param weights numeric vector of size n with the weight factor for each
+//' observation.
+//' @param clusters integer vector of size n with the cluster location for each
+//' observation.
+//' @param distances numeric vector of size n with the distances from each
+//' observation to its nearest cluster center.
+//'
+//' @return
+//' Numeric matrix with the new cluster centers.
+//'
 // [[Rcpp::export]]
-NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
-                              IntegerVector clusters,
-                              NumericVector distances_min) {
+NumericMatrix new_centers(NumericMatrix x, NumericVector weights,
+                          IntegerVector clusters, NumericVector distances) {
 
   const std::size_t n_clusters = unique(clusters).size();
   const std::size_t p = x.cols();
@@ -246,20 +256,11 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
   NumericMatrix out(n_clusters, p);
 
   for (std::size_t column = 0; column != p; ++column) {
-    NumericVector tmp(no_init(n));
-    for (std::size_t row = 0; row != n; ++row) {
-      tmp[row] = x(row, column) * weights[row];
-    }
-
+    NumericVector weighted_column = x.column(column) * weights;
     NumericVector sums(n_clusters, 0.0);
 
-    // Rewriteloop using this method
-
-    // for(it = x.begin(), out_it = out.begin(); it != x.end();
-    //     ++it, ++out_it)
-
     for (std::size_t idx = 0; idx != clusters.size(); ++idx) {
-      sums[clusters[idx] - 1] += tmp[idx];
+      sums[clusters[idx] - 1] += weighted_column[idx];
     }
 
     for (auto &cluster_it : clusters) {
@@ -278,7 +279,7 @@ NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights,
     }
 
     IntegerVector furthest_indices =
-        top_index(distances_min, empty_pos.size(), true);
+        top_index(distances, empty_pos.size(), true);
 
     for (std::size_t column = 0; column != p; ++column) {
       std::size_t idx = 0;

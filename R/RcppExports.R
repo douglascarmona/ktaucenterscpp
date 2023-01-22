@@ -274,8 +274,21 @@ weight_factor <- function(wni, clusters) {
     .Call('_ktaucenterscpp_weight_factor', PACKAGE = 'ktaucenterscpp', wni, clusters)
 }
 
-get_new_centers <- function(x, weights, clusters, distances_min) {
-    .Call('_ktaucenterscpp_get_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, distances_min)
+#' Computes new cluster centers
+#'
+#' @param x numeric matrix of size n x p with all observations.
+#' @param weights numeric vector of size n with the weight factor for each
+#' observation.
+#' @param clusters integer vector of size n with the cluster location for each
+#' observation.
+#' @param distances numeric vector of size n with the distances from each
+#' observation to its nearest cluster center.
+#'
+#' @return
+#' Numeric matrix with the new cluster centers.
+#'
+new_centers <- function(x, weights, clusters, distances) {
+    .Call('_ktaucenterscpp_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, distances)
 }
 
 #' Calculates the median of a numeric vector

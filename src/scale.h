@@ -11,7 +11,7 @@ double mscale(NumericVector, const double, const double);
 double tau_scale(NumericVector, const double, const double);
 NumericVector wni(NumericVector, const double, const double, const double);
 NumericVector weight_factor(NumericVector, IntegerVector);
-NumericMatrix get_new_centers(NumericMatrix, NumericVector, IntegerVector,
-                              NumericVector);
+NumericMatrix new_centers(NumericMatrix, NumericVector, IntegerVector,
+                          NumericVector);
 
 #endif

@@ -220,17 +220,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_new_centers
-NumericMatrix get_new_centers(NumericMatrix x, NumericVector weights, IntegerVector clusters, NumericVector distances_min);
-RcppExport SEXP _ktaucenterscpp_get_new_centers(SEXP xSEXP, SEXP weightsSEXP, SEXP clustersSEXP, SEXP distances_minSEXP) {
+// new_centers
+NumericMatrix new_centers(NumericMatrix x, NumericVector weights, IntegerVector clusters, NumericVector distances);
+RcppExport SEXP _ktaucenterscpp_new_centers(SEXP xSEXP, SEXP weightsSEXP, SEXP clustersSEXP, SEXP distancesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type clusters(clustersSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type distances_min(distances_minSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_new_centers(x, weights, clusters, distances_min));
+    Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
+    rcpp_result_gen = Rcpp::wrap(new_centers(x, weights, clusters, distances));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -289,7 +289,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ktaucenterscpp_tau_scale", (DL_FUNC) &_ktaucenterscpp_tau_scale, 3},
     {"_ktaucenterscpp_wni", (DL_FUNC) &_ktaucenterscpp_wni, 4},
     {"_ktaucenterscpp_weight_factor", (DL_FUNC) &_ktaucenterscpp_weight_factor, 2},
-    {"_ktaucenterscpp_get_new_centers", (DL_FUNC) &_ktaucenterscpp_get_new_centers, 4},
+    {"_ktaucenterscpp_new_centers", (DL_FUNC) &_ktaucenterscpp_new_centers, 4},
     {"_ktaucenterscpp_median_cpp", (DL_FUNC) &_ktaucenterscpp_median_cpp, 1},
     {"_ktaucenterscpp_top_index", (DL_FUNC) &_ktaucenterscpp_top_index, 3},
     {"_ktaucenterscpp_max_tolerance", (DL_FUNC) &_ktaucenterscpp_max_tolerance, 2},
