@@ -3,7 +3,12 @@
 #include <queue>
 using namespace Rcpp;
 
-//' Calculates the median of a numeric vector
+//' Computes the median of a numeric vector
+//'
+//' @param x numeric vector.
+//'
+//' @return median of a numeric vector.
+//'
 // [[Rcpp::export]]
 double median_cpp(NumericVector x) {
   std::size_t size = x.size();
@@ -94,6 +99,11 @@ IntegerVector top_index(NumericVector v, int n, bool decreasing) {
 }
 
 //' Estimates maximum tolerance between two given matrix row wise
+//'
+//' @param x numeric matrix.
+//' @param y numeric matrix.
+//'
+//' @return max euclidean difference two given matrix row wise.
 //'
 // [[Rcpp::export]]
 double max_tolerance(NumericMatrix x, NumericMatrix y) {

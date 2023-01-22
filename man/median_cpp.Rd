@@ -2,10 +2,16 @@
 % Please edit documentation in R/RcppExports.R
 \name{median_cpp}
 \alias{median_cpp}
-\title{Calculates the median of a numeric vector}
+\title{Computes the median of a numeric vector}
 \usage{
 median_cpp(x)
 }
+\arguments{
+\item{x}{numeric vector.}
+}
+\value{
+median of a numeric vector.
+}
 \description{
-Calculates the median of a numeric vector
+Computes the median of a numeric vector
 }

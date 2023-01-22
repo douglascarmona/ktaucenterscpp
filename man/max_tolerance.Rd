@@ -6,6 +6,14 @@
 \usage{
 max_tolerance(x, y)
 }
+\arguments{
+\item{x}{numeric matrix.}
+
+\item{y}{numeric matrix.}
+}
+\value{
+max euclidean difference two given matrix row wise.
+}
 \description{
 Estimates maximum tolerance between two given matrix row wise
 }

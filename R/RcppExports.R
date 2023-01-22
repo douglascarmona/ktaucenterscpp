@@ -291,7 +291,12 @@ new_centers <- function(x, weights, clusters, distances) {
     .Call('_ktaucenterscpp_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, distances)
 }
 
-#' Calculates the median of a numeric vector
+#' Computes the median of a numeric vector
+#'
+#' @param x numeric vector.
+#'
+#' @return median of a numeric vector.
+#'
 median_cpp <- function(x) {
     .Call('_ktaucenterscpp_median_cpp', PACKAGE = 'ktaucenterscpp', x)
 }
@@ -311,6 +316,11 @@ top_index <- function(v, n, decreasing) {
 }
 
 #' Estimates maximum tolerance between two given matrix row wise
+#'
+#' @param x numeric matrix.
+#' @param y numeric matrix.
+#'
+#' @return max euclidean difference two given matrix row wise.
 #'
 max_tolerance <- function(x, y) {
     .Call('_ktaucenterscpp_max_tolerance', PACKAGE = 'ktaucenterscpp', x, y)
