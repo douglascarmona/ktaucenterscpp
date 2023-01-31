@@ -110,14 +110,14 @@ flag_outliers <- function(cutoff, b, ktau) {
     .Call('_ktaucenterscpp_flag_outliers', PACKAGE = 'ktaucenterscpp', cutoff, b, ktau)
 }
 
-#' Quasi optimal rho function
+#' Quasi optimal \eqn{\rho} function
 #'
 #' @param x numeric vector with positive values.
 #' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with quasi optimal rho computation for each element of
-#' x.
+#' Numeric vector with quasi optimal \eqn{\rho} computation for each element
+#' of x.
 #'
 #'@references
 #' [1] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
@@ -128,26 +128,26 @@ rho_opt <- function(x, c) {
     .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
-#' Derivative of the quasi optimal rho function
+#' Derivative of the quasi optimal \eqn{\rho} function
 #'
 #' @param x numeric vector with positive values.
 #' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with the derivative of the quasi optimal rho computation
-#' for each element of x.
+#' Numeric vector with the derivative of the quasi optimal \eqn{\rho}
+#' computation for each element of x.
 #'
 psi_opt <- function(x, c) {
     .Call('_ktaucenterscpp_psi_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
 
-#' Second derivative of the quasi rho function
+#' Second derivative of the quasi \eqn{\rho} function
 #'
 #' @param x numeric vector with positive values.
 #' @param c tunning constant.
 #'
 #' @return
-#' Numeric vector with the second derivative of the quasi optimal rho
+#' Numeric vector with the second derivative of the quasi optimal \eqn{\rho}
 #' computation for each element of x.
 #'
 derpsi_opt <- function(x, c) {

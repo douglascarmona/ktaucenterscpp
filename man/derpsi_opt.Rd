@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{derpsi_opt}
 \alias{derpsi_opt}
-\title{Second derivative of the quasi rho function}
+\title{Second derivative of the quasi \eqn{\rho} function}
 \usage{
 derpsi_opt(x, c)
 }
@@ -12,9 +12,9 @@ derpsi_opt(x, c)
 \item{c}{tunning constant.}
 }
 \value{
-Numeric vector with the second derivative of the quasi optimal rho
+Numeric vector with the second derivative of the quasi optimal \eqn{\rho}
 computation for each element of x.
 }
 \description{
-Second derivative of the quasi rho function
+Second derivative of the quasi \eqn{\rho} function
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{rho_opt}
 \alias{rho_opt}
-\title{Quasi optimal rho function}
+\title{Quasi optimal \eqn{\rho} function}
 \usage{
 rho_opt(x, c)
 }
@@ -12,11 +12,11 @@ rho_opt(x, c)
 \item{c}{tunning constant.}
 }
 \value{
-Numeric vector with quasi optimal rho computation for each element of
-x.
+Numeric vector with quasi optimal \eqn{\rho} computation for each element
+of x.
 }
 \description{
-Quasi optimal rho function
+Quasi optimal \eqn{\rho} function
 }
 \references{
 [1] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
