@@ -5,7 +5,7 @@
 \title{Robust Clustering algorithm based on centers, a robust and efficient version
 of kmeans.}
 \usage{
-ktaucenters_run(x, centers, tolerance, iter_max)
+ktaucenters_run(x, centers, tolerance, max_iter)
 }
 \arguments{
 \item{x}{numeric matrix of size n x p with all observations.}
@@ -15,7 +15,7 @@ ktaucenters_run(x, centers, tolerance, iter_max)
 \item{tolerance}{maximum difference between current and new computed
 clusters. Parameter used for the algorithm stopping rule.}
 
-\item{iter_max}{a maximum number of iterations used for the algorithm
+\item{max_iter}{a maximum number of iterations used for the algorithm
 stopping rule.}
 }
 \value{

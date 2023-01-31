@@ -11,7 +11,7 @@ using namespace Rcpp;
 //' @param centers numeric matrix with initial cluster centers.
 //' @param tolerance maximum difference between current and new computed
 //' clusters. Parameter used for the algorithm stopping rule.
-//' @param iter_max a maximum number of iterations used for the algorithm
+//' @param max_iter a maximum number of iterations used for the algorithm
 //' stopping rule.
 //'
 //' @return A list with the following components:
@@ -35,7 +35,7 @@ using namespace Rcpp;
 //'
 // [[Rcpp::export]]
 List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
-                     const double tolerance, const std::size_t iter_max) {
+                     const double tolerance, const std::size_t max_iter) {
 
   const std::size_t n_clusters = centers.rows();
   const std::size_t n = x.rows();
@@ -53,7 +53,7 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
   NumericVector distance_min(n);
   IntegerVector clusters(n);
   double tau;
-  while (iter < iter_max && tol > tolerance) {
+  while (iter < max_iter && tol > tolerance) {
     // Step 1: (re)compute labels
     List cluster_loc = cluster_location(x, centers);
     distance_min = cluster_loc["distance"];

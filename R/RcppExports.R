@@ -70,7 +70,7 @@ dist_to_kNN <- function(D, k) {
 #' @param centers numeric matrix with initial cluster centers.
 #' @param tolerance maximum difference between current and new computed
 #' clusters. Parameter used for the algorithm stopping rule.
-#' @param iter_max a maximum number of iterations used for the algorithm
+#' @param max_iter a maximum number of iterations used for the algorithm
 #' stopping rule.
 #'
 #' @return A list with the following components:
@@ -92,8 +92,8 @@ dist_to_kNN <- function(D, k) {
 #' of multivariate scatter and location.Computational Statistics &Data
 #' Analysis, 109 : 64–75.
 #'
-ktaucenters_run <- function(x, centers, tolerance, iter_max) {
-    .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, iter_max)
+ktaucenters_run <- function(x, centers, tolerance, max_iter) {
+    .Call('_ktaucenterscpp_ktaucenters_run', PACKAGE = 'ktaucenterscpp', x, centers, tolerance, max_iter)
 }
 
 #' Flag outliers
