@@ -10,7 +10,7 @@ Authors@R: c(person("Juan Domingo", "Gonzalez", email = "juanrst@hotmail.com", r
              person("Ruben H.", "Zamar", email = "ruben@stat.ubc.ca", role = "aut")
     )
 Maintainer: Douglas Alberto Carmona Guanipa <douglas.albertocg@gmail.com>
-SystemRequirements: C++17
+SystemRequirements: C++14
 Description: A clustering algorithm similar to K-Means is implemented, it has two main advantages, 
     namely (a) The estimator is resistant to outliers, that means that results of estimator are still correct when
     there are atypical values in the sample and (b) The estimator is efficient, roughly speaking, 
