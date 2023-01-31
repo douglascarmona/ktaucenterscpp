@@ -2,27 +2,27 @@
 % Please edit documentation in R/RcppExports.R
 \name{normal_consistency_constants}
 \alias{normal_consistency_constants}
-\title{normal_consistency_constants}
+\title{Normal Consistency Constants}
 \usage{
 normal_consistency_constants(p)
 }
 \arguments{
-\item{p}{dimension where observation lives}
+\item{p}{dimension where observation lives.}
 }
 \value{
-c tunning constant
+tuning constant.
 }
 \description{
-constants previously computed so the M scale is
-consistent with the standard normal distribution for the quasi optimal rho
-function considered in \code{\link{rho_opt}}. (Constant were computed from
-p = 1 to p = 400)
+M scale tuning constants so it is consistent with the standard
+normal distribution for the quasi optimal \eqn{\rho} function used in
+\code{\link{rho_opt}}. These constants were computed for 1 \eqn{\leq} p
+\eqn{\leq} 400.
 }
 \references{
-[1] Maronna, R. A., Martin, R. D., Yohai, V. J., &
-Salibián-Barrera, M. (2018). 'Robust statistics: theory and methods (with R).
-Wiley.
-[2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008).
-The fast-tau estimator for regression.
-Journal of Computational and Graphical Statistics, 17(3), 659-682.
+[1] Maronna, R. A., Martin, R. D., Yohai, V. J., & Salibián-Barrera, M.
+(2018). 'Robust statistics: theory and methods (with ' R). Wiley.
+
+[2] Salibian-Barrera, M., Willems, G., & Zamar, R. (2008). The fast-tau
+estimator for regression. 'Journal of Computational and Graphical
+Statistics, 17(3), 659-682.
 }

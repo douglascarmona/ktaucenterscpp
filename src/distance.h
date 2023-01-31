@@ -4,6 +4,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-List distance_to_centers(NumericMatrix, NumericMatrix);
+NumericMatrix distance(NumericMatrix);
 
 #endif

@@ -10,6 +10,7 @@ Authors@R: c(person("Juan Domingo", "Gonzalez", email = "juanrst@hotmail.com", r
              person("Ruben H.", "Zamar", email = "ruben@stat.ubc.ca", role = "aut")
     )
 Maintainer: Douglas Alberto Carmona Guanipa <douglas.albertocg@gmail.com>
+SystemRequirements: C++14
 Description: A clustering algorithm similar to K-Means is implemented, it has two main advantages, 
     namely (a) The estimator is resistant to outliers, that means that results of estimator are still correct when
     there are atypical values in the sample and (b) The estimator is efficient, roughly speaking, 
@@ -19,6 +20,7 @@ Description: A clustering algorithm similar to K-Means is implemented, it has tw
 References: Gonzalez J.D, Yohai V., and Zamar R. (2019) <arxiv:https://arxiv.org/abs/1906.08198>
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 4.2)
 Language: en-US
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp

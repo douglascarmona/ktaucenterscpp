@@ -2,24 +2,19 @@
 % Please edit documentation in R/RcppExports.R
 \name{derpsi_opt}
 \alias{derpsi_opt}
-\title{derpsiOpt
-the derivative of the psi function}
+\title{Second derivative of the quasi \eqn{\rho} function}
 \usage{
-derpsi_opt(t, c)
+derpsi_opt(x, c)
 }
 \arguments{
-\item{t}{a numeric vector}
+\item{x}{numeric vector with positive values.}
 
-\item{c}{a tunning constant.}
+\item{c}{tunning constant.}
 }
 \value{
-rho'(\code{x}/ \code{c})
+Numeric vector with the second derivative of the quasi optimal \eqn{\rho}
+computation for each element of x.
 }
 \description{
-derpsiOpt
-the derivative of the psi function
-}
-\examples{
-val <- derpsi_opt(t = 0.5, c = 1.0)
-
+Second derivative of the quasi \eqn{\rho} function
 }

@@ -2,10 +2,23 @@
 % Please edit documentation in R/RcppExports.R
 \name{wni}
 \alias{wni}
-\title{Wni function}
+\title{Weight function}
 \usage{
-wni(u, c1, c2, s, b1, b2)
+wni(distances, c1, c2, s)
+}
+\arguments{
+\item{distances}{numeric vector with distances from each point to its
+cluster center.}
+
+\item{c1}{tuning constant used for m scale estimation.}
+
+\item{c2}{tuning constant used for \eqn{\tau} scale estimation.}
+
+\item{s}{M scale for the same vector of distances.}
+}
+\value{
+Numeric vector with the weight for each observation
 }
 \description{
-Wni function
+Weight function
 }

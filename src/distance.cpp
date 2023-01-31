@@ -1,39 +1,31 @@
 #include "distance.h"
 #include <Rcpp.h>
 using namespace Rcpp;
-// [[Rcpp::plugins("cpp11")]]
 
-// TODO: Add docs
+//' Distance Matrix Computation
+//'
+//' Computes and returns the distance matrix using euclidean distance
+//' measure to compute the distances between the rows of a
+//' data matrix.
+//'
+//' @param x a numeric matrix.
+//'
+//' @return
+//' A numeric matrix with the distances between the rows of a matrix.
+//'
 // [[Rcpp::export]]
-List distance_to_centers(NumericMatrix data, NumericMatrix centers) {
-  /* data is a matrix with observations(rows) and variables,
-   centers is a matrix with cluster centers coordinates (rows)
-   */
+NumericMatrix distance(NumericMatrix x) {
+  const std::size_t n = x.nrow();
+  double d;
+  NumericMatrix out(no_init(n, n));
 
-  const int k = centers.rows();        // number of centers
-  const int n = data.rows();           // number of observations
-  const int p = data.cols();           // number of variables
-  IntegerVector membership(n);         // membership vector
-  NumericVector min_distance(n);       // distance vector to closest center
-  NumericMatrix distance_matrix(n, k); // return value
-
-  for (int n_iter = 0; n_iter < n; ++n_iter) {
-    double min_dist_aux = R_PosInf;
-    for (int k_iter = 0; k_iter < k; ++k_iter) {
-      double dist = 0.0;
-      for (int p_iter = 0; p_iter < p; ++p_iter) {
-        dist += pow(data(n_iter, p_iter) - centers(k_iter, p_iter), 2);
-      }
-      dist = sqrt(dist);
-      distance_matrix(n_iter, k_iter) = dist;
-      if (dist < min_dist_aux) {
-        min_distance(n_iter) = dist;
-        membership(n_iter) = k_iter + 1;
-        min_dist_aux = dist;
-      }
+  for (std::size_t i = 0; i < n - 1; ++i) {
+    for (std::size_t j = i + 1; j < n; ++j) {
+      d = sqrt(sum(pow(x.row(i) - x.row(j), 2.0)));
+      out(i, i) = 0.0;
+      out(j, i) = d;
+      out(i, j) = d;
     }
   }
-  return (List::create(_["distance_matrix"] = distance_matrix,
-                       _["membership"] = membership,
-                       _["min_distance"] = min_distance));
+  return out;
 }
