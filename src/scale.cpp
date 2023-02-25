@@ -251,7 +251,6 @@ NumericMatrix new_centers(NumericMatrix x, NumericVector weights,
 
   const std::size_t n_clusters = unique(clusters).size();
   const std::size_t p = x.cols();
-  const std::size_t n = x.rows();
 
   NumericMatrix out(n_clusters, p);
 
