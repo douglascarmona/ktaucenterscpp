@@ -33,13 +33,12 @@ List cluster_location(NumericMatrix x, NumericMatrix centers) {
         tmp = x[n_iter + n * p_iter] - centers[k_iter + k * p_iter];
         dd += tmp * tmp;
       }
-      dd = std::sqrt(dd);
       if (dd < best) {
         best = dd;
         inew = k_iter + 1; // Base 1 cluster location.
       }
     }
-    distance[n_iter] = best;
+    distance[n_iter] = std::sqrt(best);
     clusters[n_iter] = inew;
   }
   return List::create(_["clusters"] = clusters, _["distance"] = distance);
