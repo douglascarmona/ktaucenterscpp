@@ -45,7 +45,6 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
   const double c2 = const_c2(p);
   // Target breakdown point
   const double b1 = 0.5;
-  const double b2 = 1.0;
 
   std::size_t iter = 0;
   double tol = tolerance + 1.0;
@@ -65,12 +64,11 @@ List ktaucenters_run(NumericMatrix x, NumericMatrix centers,
 
     s = mscale(distance_min, c1, b1);
     tau = tau_scale(distance_min, c2, s);
-
     // Step 2: (re)compute centers
     old_centers = centers;
     Wni = wni(distance_min, c1, c2, s);
     weights = weight_factor(Wni, clusters);
-    centers = new_centers(x, weights, clusters, distance_min);
+    centers = new_centers(x, weights, clusters, n_clusters, distance_min);
 
     tol = max_tolerance(old_centers, centers);
     iter += 1;
