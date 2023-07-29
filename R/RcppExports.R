@@ -124,6 +124,7 @@ flag_outliers <- function(cutoff, b, ktau) {
 #' estimator for regression. Journal of Computational and GraphicalStatistics,
 #' 17(3), 659-682.
 #'
+#'@export
 rho_opt <- function(x, c) {
     .Call('_ktaucenterscpp_rho_opt', PACKAGE = 'ktaucenterscpp', x, c)
 }
@@ -328,8 +329,8 @@ weight_factor <- function(wni, clusters) {
 #' @return
 #' Numeric matrix with the new cluster centers.
 #'
-new_centers <- function(x, weights, clusters, distances) {
-    .Call('_ktaucenterscpp_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, clusters, distances)
+new_centers <- function(x, weights, cluster_location, n_clusters, distances) {
+    .Call('_ktaucenterscpp_new_centers', PACKAGE = 'ktaucenterscpp', x, weights, cluster_location, n_clusters, distances)
 }
 
 #' Computes the median of a numeric vector
